@@ -1,3 +1,3 @@
 import pygame
 #see on test
-print("see on meie programm")
+print("see on meie projekt")
