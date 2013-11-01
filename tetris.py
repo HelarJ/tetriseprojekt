@@ -5,25 +5,41 @@ from pygame.locals import *
 
 
 class TetrisPõhi:
-    def __init__(self, laius=480, kõrgus=700):
+    def __init__(self):
         pygame.init()
-        self.laius = laius
-        self.kõrgus = kõrgus
+        self.laius = 480
+        self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algusx = 310
-        self.algusy = 20
+        self.x = 310 #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.y = 20
+        self.äärP = False
+        self.äärV = False
 
     def joonistakuup(self):
-        pygame.draw.rect(self.aken, pygame.Color(200,20,20), (self.algusx, self.algusy, self.kuup, self.kuup))
+        pygame.draw.rect(self.aken, pygame.Color(200,20,20), (self.x, self.y, self.kuup, self.kuup))
+        pygame.draw.rect(self.aken, pygame.Color(100,100,100), (self.x+2, self.y+2, self.kuup-4, self.kuup-4))
 
     def liigutaplokk(self, suund):
         if suund == ("alla"):
-            self.algusy += self.kuup
+            if self.y < 650:
+                self.y += self.kuup
+        self.onäär()
         if suund == ("paremale"):
-            self.algusx += self.kuup
+            if not self.äärP:
+                self.x += self.kuup
         if suund == ("vasakule"):
-            self.algusx -= self.kuup
+            if not self.äärV:
+                self.x -= self.kuup
+        self.äärP = False
+        self.äärV = False
+
+    def onäär(self):
+        print(self.x)
+        if self.x > 400:
+            self.äärP = True
+        if self.x < 190:
+            self.äärV = True
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
@@ -46,7 +62,7 @@ class TetrisPõhi:
         #does not loop very well
 
     def põhikordus(self):
-        self.muusika()
+        #self.muusika()
         fpsClock = pygame.time.Clock()
 
         while True:
