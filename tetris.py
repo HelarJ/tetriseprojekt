@@ -7,12 +7,14 @@ from pygame.locals import *
 class TetrisPõhi:
     def __init__(self):
         pygame.init()
-        self.laius = 480
+        self.laius = 800
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.x = 310 #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
-        self.y = 20
+        self.algnex = 400 #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algney = 20
+        self.x = self.algnex
+        self.y = self.algney
         self.äärP = False
         self.äärV = False
 
@@ -36,9 +38,9 @@ class TetrisPõhi:
 
     def onäär(self):
         print(self.x)
-        if self.x > 400:
+        if self.x > (self.algnex+110):
             self.äärP = True
-        if self.x < 190:
+        if self.x < (self.algnex-120):
             self.äärV = True
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
@@ -52,7 +54,7 @@ class TetrisPõhi:
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         self.aken.fill(pygame.Color(200, 200, 200))  #Kogu taust
-        pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (160, 20, 300, 660))  #Mänguväljaku taust
+        pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
         self.liigutaplokk("alla")
         self.joonistakuup()
 
