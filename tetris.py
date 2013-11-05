@@ -15,12 +15,12 @@ class TetrisPõhi:
         self.algney = 20
         self.x = self.algnex
         self.y = self.algney
+        self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
         self.äärP = False
         self.äärV = False
 
     def joonistakuup(self):
-        pygame.draw.rect(self.aken, pygame.Color(200,20,20), (self.x, self.y, self.kuup, self.kuup))
-        pygame.draw.rect(self.aken, pygame.Color(100,100,100), (self.x+2, self.y+2, self.kuup-4, self.kuup-4))
+        self.aken.blit(self.punane, (self.x, self.y))
 
     def liigutaplokk(self, suund):
         if suund == ("alla"):
@@ -59,7 +59,7 @@ class TetrisPõhi:
         self.joonistakuup()
 
     def muusika(self):
-        pygame.mixer.music.load('tetrisA.mp3')
+        pygame.mixer.music.load(os.path.join('andmed','tetrisA.mp3'))
         pygame.mixer.music.play(loops=100)
         #does not loop very well
 
