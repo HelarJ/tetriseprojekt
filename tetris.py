@@ -57,7 +57,7 @@ class TetrisPõhi:
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
 
-    def joonista(self):  #abifunktsioon kaadri joonistamiseksü
+    def joonista(self):  #abifunktsioon kaadri joonistamiseks
         self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
         pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
         if self.i == self.kiirus:
