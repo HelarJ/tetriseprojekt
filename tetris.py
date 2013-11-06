@@ -19,7 +19,7 @@ class TetrisPõhi:
         self.äärP = False
         self.äärV = False
         self.fpsClock = pygame.time.Clock()
-        self.kiirus = 15
+        self.kiirus = 15 #mida väiksem seda kiirem
         self.i = 0
 
     def joonistakuup(self):
@@ -54,6 +54,8 @@ class TetrisPõhi:
             self.liigutaplokk("vasakule")
         if nupp == K_RIGHT:
             self.liigutaplokk("paremale")
+        if nupp == K_DOWN:
+            self.liigutaplokk("alla")
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
