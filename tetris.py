@@ -57,7 +57,7 @@ class TetrisPõhi:
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
 
-    def joonista(self):  #abifunktsioon kaadri joonistamiseks
+    def joonista(self):  #abifunktsioon kaadri joonistamiseksü
         self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
         pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
         if self.i == self.kiirus:
@@ -70,9 +70,10 @@ class TetrisPõhi:
         pygame.mixer.music.load(os.path.join('andmed','tetrisA.mp3'))
         pygame.mixer.music.play(loops=100)
         #does not loop very well
+        #maybe replace with afro circus
 
     def põhikordus(self):
-        #self.muusika()
+        self.muusika()
 
 
         while True:
