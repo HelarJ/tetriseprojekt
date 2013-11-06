@@ -18,6 +18,9 @@ class TetrisPõhi:
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
         self.äärP = False
         self.äärV = False
+        self.fpsClock = pygame.time.Clock()
+        self.kiirus = 15
+        self.i = 0
 
     def joonistakuup(self):
         self.aken.blit(self.punane, (self.x, self.y))
@@ -53,10 +56,13 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
-        self.aken.fill(pygame.Color(200, 200, 200))  #Kogu taust
+        self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
         pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
-        self.liigutaplokk("alla")
+        if self.i == self.kiirus:
+            self.liigutaplokk("alla")
+            self.i = 0
         self.joonistakuup()
+        self.i+=1
 
     def muusika(self):
         pygame.mixer.music.load(os.path.join('andmed','tetrisA.mp3'))
@@ -65,7 +71,7 @@ class TetrisPõhi:
 
     def põhikordus(self):
         #self.muusika()
-        fpsClock = pygame.time.Clock()
+
 
         while True:
             for event in pygame.event.get():
@@ -76,7 +82,8 @@ class TetrisPõhi:
 
             self.joonista()
             pygame.display.update()  #joonistab kõik ekraanile
-            fpsClock.tick(2)  #Renderdamise kiirus
+            self.fpsClock.tick(30)  #Renderdamise kiirus
+
 
 
 põhiaken = TetrisPõhi()
