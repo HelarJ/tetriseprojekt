@@ -1,7 +1,7 @@
 import os
 import sys
 import pygame
-import pygame.locals
+from pygame.locals import *
 
 
 class TetrisPõhi:
@@ -47,14 +47,14 @@ class TetrisPõhi:
             self.äärV = True
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
-        if nupp == pygame.K_ESCAPE:
-            pygame.event.post(pygame.event.Event(pygame.QUIT))
+        if nupp == K_ESCAPE:
+            pygame.event.post(pygame.event.Event(QUIT))
             #Väljub programmist
-        if nupp == pygame.K_LEFT:
+        if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
-        if nupp == pygame.K_RIGHT:
+        if nupp == K_RIGHT:
             self.liigutaplokk("paremale")
-        if nupp == pygame.K_DOWN:
+        if nupp == K_DOWN:
             self.liigutaplokk("alla")
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
@@ -79,7 +79,7 @@ class TetrisPõhi:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                elif event.type == pygame.KEYDOWN:
+                elif event.type == KEYDOWN:
                     self.nupuvajutus(event.key)
 
             self.joonista()
