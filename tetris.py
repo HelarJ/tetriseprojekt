@@ -72,9 +72,10 @@ class TetrisPõhi:
         pygame.mixer.music.load(os.path.join('andmed','tetrisA.mp3'))
         pygame.mixer.music.play(loops=100)
         #does not loop very well
+        #maybe replace with afro circus
 
     def põhikordus(self):
-        #self.muusika()
+        self.muusika()
 
 
         while True:
