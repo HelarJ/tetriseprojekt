@@ -16,6 +16,8 @@ class TetrisPõhi:
         self.x = self.algnex
         self.y = self.algney
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
+        self.sinine = pygame.image.load(os.path.join("andmed", "sinine.png"))
+        self.hall = pygame.image.load(os.path.join("andmed", "hall.png"))
         self.äärP = False
         self.äärV = False
         self.fpsClock = pygame.time.Clock()
@@ -23,7 +25,7 @@ class TetrisPõhi:
         self.i = 0
 
     def joonistakuup(self):
-        self.aken.blit(self.punane, (self.x, self.y))
+        self.aken.blit(self.sinine, (self.x, self.y))
 
     def liigutaplokk(self, suund):
         if suund == ("alla"):
@@ -77,7 +79,7 @@ class TetrisPõhi:
 
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+                if event.type == QUIT:
                     sys.exit()
                 elif event.type == KEYDOWN:
                     self.nupuvajutus(event.key)
