@@ -23,6 +23,15 @@ class TetrisPõhi:
         self.fpsClock = pygame.time.Clock()
         self.kiirus = 15 #mida väiksem seda kiirem
         self.i = 0
+        self.maatriks = []
+
+    def tühiplats(self):
+        for i in range(21):
+            rida = []
+            for j in range(9):
+                rida.append(0)
+            self.maatriks.append(rida)
+
 
     def joonistakuup(self):
         self.aken.blit(self.sinine, (self.x, self.y))
@@ -42,7 +51,7 @@ class TetrisPõhi:
         self.äärV = False
 
     def onäär(self):
-        print(self.x)
+        #print(self.x)
         if self.x > (self.algnex+110):
             self.äärP = True
         if self.x < (self.algnex-120):
@@ -58,6 +67,9 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
+        if nupp == K_UP:
+            self.tühiplats()
+            print(self.maatriks)
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
@@ -75,7 +87,7 @@ class TetrisPõhi:
         #maybe replace with afro circus
 
     def põhikordus(self):
-        self.muusika()
+        #self.muusika()
 
 
         while True:
