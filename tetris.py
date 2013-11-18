@@ -67,7 +67,7 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
-        if nupp == K_UP:
+        if nupp == K_UP: #testiks
             self.tühiplats()
             print(self.maatriks)
 
