@@ -84,7 +84,7 @@ class TetrisPõhi:
         #maybe replace with afro circus
 
     def põhikordus(self):
-        #self.muusika()
+        self.muusika()
         self.tühiplats()
 
         while True:
