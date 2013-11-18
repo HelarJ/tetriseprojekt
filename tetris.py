@@ -67,9 +67,6 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
-        if nupp == K_UP:
-            self.tühiplats()
-            print(self.maatriks)
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
@@ -88,7 +85,7 @@ class TetrisPõhi:
 
     def põhikordus(self):
         #self.muusika()
-
+        self.tühiplats()
 
         while True:
             for event in pygame.event.get():
