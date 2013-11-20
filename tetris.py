@@ -21,6 +21,7 @@ class TetrisPõhi:
         self.hall = pygame.image.load(os.path.join("andmed", "hall.png"))
         self.äärP = False
         self.äärV = False
+        self.äärPõhi = False
         self.fpsClock = pygame.time.Clock()
         self.kiirus = 15 #mida väiksem seda kiirem
         self.i = 0
@@ -138,11 +139,19 @@ class TetrisPõhi:
         return klots
 
     def lisaKlotsMaatriksisse(self):
+        b = True
+        return b
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
 
-    def kustutaTäisRida(self):
+    def kasTäisRida(self, maatriks, y):
+        a = True
+
+    def kustutaTäisRida(self, maatriks):
+        a = True
+        return a
+
 
         #kustutab kõik täis read
         #liigutab kõik mis nende peal on alla
@@ -161,13 +170,14 @@ class TetrisPõhi:
                 self.y += self.kuup
         self.onäär()
         if suund == ("paremale"):
-            if not self.äärP:
+            if not self.äärP and not self.äärPõhi:
                 self.x += self.kuup
         if suund == ("vasakule"):
-            if not self.äärV:
+            if not self.äärV and not self.äärPõhi:
                 self.x -= self.kuup
         self.äärP = False
         self.äärV = False
+        self.äärPõhi = False
 
     #muuda et kontrolliks ka alumist serva
     #muuda et kontrolliks teisi klotse (kontrrolli maatriksit)
@@ -177,6 +187,11 @@ class TetrisPõhi:
             self.äärP = True
         if self.x < (self.algnex - 120):
             self.äärV = True
+        if self.y == 650:
+            self.äärPõhi = True
+
+
+
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
