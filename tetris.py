@@ -160,7 +160,16 @@ class TetrisPõhi:
 
     def joonista_klots(self):
         #teised klotsid ka vaja lisada
-        self.aken.blit(self.sinine, (self.x, self.y))
+        for rida in self.maatriks:
+            i = 0
+            for element in rida:
+                if element == 0:
+                    a = True
+                else:
+                    self.aken.blit(element, (self.x, self.y))
+                i += 1
+
+
 
 
     def liigutaplokk(self, suund):
