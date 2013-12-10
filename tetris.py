@@ -151,8 +151,6 @@ class TetrisPõhi:
     def kustutaTäisRida(self, maatriks):
         a = True
         return a
-
-
         #kustutab kõik täis read
         #liigutab kõik mis nende peal on alla
         #returnib mitu rida kustutati
@@ -163,9 +161,7 @@ class TetrisPõhi:
         for rida in self.maatriks:
             i = 0
             for element in rida:
-                if element == 0:
-                    a = True
-                else:
+                if element != 0:
                     self.aken.blit(element, (self.x, self.y))
                 i += 1
 
@@ -244,6 +240,10 @@ class TetrisPõhi:
                     sys.exit()
                 elif event.type == KEYDOWN:
                     self.nupuvajutus(event.key)
+
+            #kontroll: kui vana paigas
+            print(self.teeUusKlots())
+
 
             self.joonista()
             pygame.display.update()  #joonistab kõik ekraanile
