@@ -247,10 +247,10 @@ class TetrisPõhi:
         self.muusika()
         plats = self.tühiplats()
 
-        kukkuv_klots = teeUusKlots()
+        kukkuv_klots = self.teeUusKlots()
 
         while True:
-            if vaja_uus_klots:
+            if self.vaja_uus_klots:
                 kukkuv_klots = self.teeUusKlots()
 
                 #kui enam ei mahu siis mäng läbi
