@@ -19,6 +19,7 @@ class TetrisPõhi:
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
         self.sinine = pygame.image.load(os.path.join("andmed", "sinine.png"))
         self.hall = pygame.image.load(os.path.join("andmed", "hall.png"))
+        self.taust = pygame.image.load(os.path.join("andmed", "TetrisTaust.png"))
         self.äärP = False
         self.äärV = False
         self.äärPõhi = False
@@ -221,8 +222,9 @@ class TetrisPõhi:
             self.liigutaplokk("alla")
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
-        self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
-        pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
+        #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
+        self.aken.blit(self.taust, (0,0))
+        #pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
         if self.i == self.kiirus:
             self.liigutaplokk("alla")
             self.i = 0
