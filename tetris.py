@@ -27,6 +27,10 @@ class TetrisPõhi:
         self.i = 0
         self.maatriks = [] #mänguväljaku representation
 
+        #ajutine
+        self.vaja_uus_klots = True
+        #
+
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(0, 0, 0, 0),
                     (0, 1, 1, 0),
@@ -130,17 +134,23 @@ class TetrisPõhi:
     def teeUusKlots(self):
         #teeb random uue random rotationis klotsi
         #returnib klots, mis on dictionary võtmetega kuju, rotation, x, y (värv ka äkki?)
+        #
 
         kuju = choice(list(self.shapes.keys()))
         klots = {"kuju": kuju,
-                 "asend": randint(0, len(self.shapes[kuju])-1),
-                 self.x: self.algnex,
-                 self.y: self.algney}
+                 "asend": self.shapes[kuju][0],
+                 "x": self.algnex,
+                 "y": self.algney,
+                 "värv": self.punane}
         return klots
 
-    def lisaKlotsMaatriksisse(self):
-        b = True
-        return b
+    def lisaKlotsMaatriksisse(self, maatriks, klots):
+        #vist ei tööta
+
+        for x in range(4):
+            for y in range(4):
+                if self.shapes[klots["kuju"]][klots["asend"]][y][x] != 0:
+                    maatriks[x+klots["x"]][y + klots["y"]] = klots["värv"]
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -173,7 +183,7 @@ class TetrisPõhi:
         if suund == ("alla"):
             if self.y < 650:
                 self.y += self.kuup
-        self.onäär()
+        self.is_valid_position()
         if suund == ("paremale"):
             if not self.äärP and not self.äärPõhi:
                 self.x += self.kuup
@@ -186,7 +196,8 @@ class TetrisPõhi:
 
     #muuda et kontrolliks ka alumist serva
     #muuda et kontrolliks teisi klotse (kontrrolli maatriksit)
-    def onäär(self):
+    def is_valid_position(self, maatriks, kukkuv_klots, järgmine_koht):
+        #kui valid pos siis return True
         #print(self.x)
         if self.x > (self.algnex + 110):
             self.äärP = True
@@ -232,17 +243,23 @@ class TetrisPõhi:
 
     def põhikordus(self):
         self.muusika()
-        self.tühiplats()
+        plats = self.tühiplats()
+
+        kukkuv_klots = teeUusKlots()
 
         while True:
+            if vaja_uus_klots:
+                kukkuv_klots = self.teeUusKlots()
+
+                #kui enam ei mahu siis mäng läbi
+                #if not is_valid_position(self, maatriks, kukkuv_klots):
+                #    return
             for event in pygame.event.get():
                 if event.type == QUIT:
                     sys.exit()
                 elif event.type == KEYDOWN:
                     self.nupuvajutus(event.key)
 
-            #kontroll: kui vana paigas
-            print(self.teeUusKlots())
 
 
             self.joonista()
