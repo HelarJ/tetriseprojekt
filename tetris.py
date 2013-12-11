@@ -24,6 +24,7 @@ class TetrisPõhi:
         self.oranz = pygame.image.load(os.path.join("andmed", "oranz.png"))
         self.helesinine = pygame.image.load(os.path.join("andmed", "helesinine.png"))
         self.hall = pygame.image.load(os.path.join("andmed", "hall.png"))
+        self.must = pygame.image.load(os.path.join("andmed", "must.png"))
         self.taust = pygame.image.load(os.path.join("andmed", "TetrisTaust.png"))
         self.äärP = False
         self.äärV = False
@@ -132,10 +133,14 @@ class TetrisPõhi:
     def tühiplats(self):
         for i in range(22):
             rida = []
-            for j in range(10):
+            for j in range(12):
                 rida.append(0)
             self.maatriks.append(rida)
-
+        for rida in self.maatriks:
+            rida[0] = 'äär'
+            rida[-1] = 'äär'
+        self.maatriks.append(['äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär'])
+        print(self.maatriks)
     def võta_värv(self, kuju):
         if kuju == "O":
             return self.sinine
@@ -213,8 +218,10 @@ class TetrisPõhi:
             i = 0
             arv = 0
             for element in rida:
+                if element == 'äär':
+                    self.aken.blit(self.must, (250 + (i * 30), 20 + (j * 30)))
 
-                if element != 0:
+                elif element != 0:
 
                     self.aken.blit(element, (250 + (i * 30), 20 + (j * 30)))
                 if element == 0:  #Temporary, maatriksi sisu näitamiseks
