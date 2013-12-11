@@ -285,17 +285,22 @@ class TetrisPõhi:
         #kontrollib kas seal juba on klots
 
         if self.klots["kuju"] == "O":
-            print(self.klots["x"])
-            for ykoht in range(self.klots["y"], self.klots["y"]+3, 1):
-                for xkoht in range(self.klots["x"], self.klots["x"]+3, 1):
-                    print(xkoht)
-                    print(self.maatriks[xkoht])
-                    if self.maatriks[xkoht+1] != 0:
-                        self.äärP = True
-                    if self.maatriks[ykoht+1] != 0:
-                        self.äärPõhi = True
-                    if self.maatriks[xkoht-1] != 0:
-                        self.äärV = True
+            if self.maatriks[self.klots["y"]][self.klots["x"]+2] != 0:
+                self.äärP = True
+            if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
+                self.äärV = True
+            if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                self.äärP = True
+            if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                self.äärV = True
+            if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
+                self.äärPõhi = True
+                self.vaja_uus_klots = True
+            if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
+                self.äärPõhi = True
+                self.vaja_uus_klots = True
+
+
 
 
 
