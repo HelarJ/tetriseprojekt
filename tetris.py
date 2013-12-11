@@ -200,8 +200,15 @@ class TetrisPõhi:
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
 
+    def on_täis_rida(self, rida):
+        for element in range(10):
+            if self.maatriks[rida][element] == 0:
+                return False
+
+        return True
+
     def kontrolli_ridu(self):
-        arv = 0
+        """arv = 0
         for rida in range(22):
             arv = 0
             for element in range(10):
@@ -211,7 +218,22 @@ class TetrisPõhi:
                 print("something something")
                 self.skoor += 100
                 for abi in range(rida-1, 0, -1):
-                    self.maatriks[rida] = self.maatriks[rida-1]
+                    self.maatriks[rida] = self.maatriks[rida-1]"""
+
+        """eemald_ridu = 0
+        y = 20
+        while y >= 0:
+            if self.on_täis_rida(y):
+                for nihuta_alla_y in range(y, 0, -1):
+                    for x in range(10):
+                        self.maatriks[x][nihuta_alla_y] = self.maatriks[x][nihuta_alla_y - 1]
+                for x in range(10):
+                    self.maatriks[x][0] = 0
+                eemald_ridu += 1
+            else:
+                y -= 1
+
+        self.skoor = eemald_ridu * 100"""
 
 
     def joonista_maatriks(self):
