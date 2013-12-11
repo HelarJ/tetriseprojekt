@@ -12,7 +12,7 @@ class TetrisPõhi:
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algnex = 5  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algnex = 4  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
         self.algney = 0
         self.x = self.algnex
         self.y = self.algney
@@ -30,7 +30,7 @@ class TetrisPõhi:
         self.klots = []
 
         #ajutine
-        self.vaja_uus_klots = True
+        self.vaja_uus_klots = False
         #
 
         #kõik klotside kujud ja nende asendid
@@ -144,10 +144,10 @@ class TetrisPõhi:
                  "x": self.algnex,
                  "y": self.algney,
                  "värv": self.punane}
-
+        print(self.klots)
     def lisaKlotsMaatriksisse(self):
         #vist ei tööta
-        kootdinaadid = False
+        koordinaat = False
         #print(self.klots)
         for x in range(4):
             for y in range(4):
@@ -177,12 +177,12 @@ class TetrisPõhi:
 
     def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
-        #print(self.maatriks)
+        print(self.maatriks)
         for rida in self.maatriks:
             i = 0
             for element in rida:
                 if element != 0:
-                    self.aken.blit(element, (200 + (self.x *30), 20 + (self.y * 30)))
+                    self.aken.blit(element, (260 + (self.x *30), 20 + (self.y * 30)))
                 i += 1
 
 
@@ -191,7 +191,7 @@ class TetrisPõhi:
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
         if suund == ("alla"):
-            if self.y < 21:
+            if not self.äärPõhi:
                 self.y += 1
         self.is_valid_position()
         if suund == ("paremale"):
@@ -210,12 +210,16 @@ class TetrisPõhi:
     def is_valid_position(self):
         #kui valid pos siis return True
         #print(self.x)
-        if self.x > (self.algnex + 110):
+        if self.x > (self.algnex + 4):
             self.äärP = True
-        if self.x < (self.algnex - 120):
+        if self.x < (self.algnex - 5):
             self.äärV = True
-        if self.y == 650:
+        if self.y >= 21:
             self.äärPõhi = True
+            self.vaja_uus_klots = True
+        print(self.y)
+        if self.y < 21:
+            self.vaja_uus_klots = False
 
 
 
@@ -238,7 +242,8 @@ class TetrisPõhi:
         if self.i == self.kiirus:
             self.liigutaplokk("alla")
             self.i = 0
-        self.teeUusKlots()
+        if self.vaja_uus_klots:
+            self.teeUusKlots()
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
         self.i += 1
