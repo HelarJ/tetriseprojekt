@@ -182,7 +182,7 @@ class TetrisPõhi:
                 #print(self.klots["y"])
                 if koordinaat != 0:
                     try:
-                        self.maatriks[self.x + self.klots["x"]][self.y + self.klots["y"]] = self.klots["värv"]
+                        self.maatriks[self.y + self.klots["y"]][self.x + self.klots["x"]] = self.klots["värv"]
                     except IndexError:
                         self.äärPõhi = True
                         self.vaja_uus_klots = True
