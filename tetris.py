@@ -125,13 +125,15 @@ class TetrisPõhi:
                     (0, 0, 0, 0),
                     (0, 0, 0, 0)]]
 
-        self.shapes = {"O": self.O_shape,
-                  "I": self.I_shape,
-                  "S": self.S_shape,
-                  "Z": self.Z_shape,
-                  "J": self.J_shape,
-                  "L": self.L_shape,
-                  "T": self.T_shape}
+        self.shapes = {
+                  "O": self.O_shape#,
+                  #"I": self.I_shape,
+                  #"S": self.S_shape,
+                  #"Z": self.Z_shape,
+                  #"J": self.J_shape,
+                  #"L": self.L_shape,
+                  #"T": self.T_shape
+                }
 
     def tühiplats(self):
         for i in range(22):
@@ -276,16 +278,28 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        a = True
+        #a = True
 
         #kontrollib kas vasak äär
         #kontrollib kas parem äär
         #kontrollib kas seal juba on klots
 
         if self.klots["kuju"] == "O":
+            print(self.klots["x"])
+            for ykoht in range(self.klots["y"], self.klots["y"]+3, 1):
+                for xkoht in range(self.klots["x"], self.klots["x"]+3, 1):
+                    print(xkoht)
+                    print(self.maatriks[xkoht])
+                    if self.maatriks[xkoht+1] != 0:
+                        self.äärP = True
+                    if self.maatriks[ykoht+1] != 0:
+                        self.äärPõhi = True
+                    if self.maatriks[xkoht-1] != 0:
+                        self.äärV = True
 
 
-        elif self.klots["kuju"] == "I":
+
+        """elif self.klots["kuju"] == "I":
             if self.klots["asend"] == 0:
 
             elif self.klots["asend"] == 1:
@@ -330,7 +344,7 @@ class TetrisPõhi:
 
             elif self.klots["asend"] == 2:
 
-            elif self.klots["asend"] == 3:
+            elif self.klots["asend"] == 3:"""
 
 
 
