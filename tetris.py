@@ -140,7 +140,7 @@ class TetrisPõhi:
             rida[0] = 'äär'
             rida[-1] = 'äär'
         self.maatriks.append(['äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär'])
-        print(self.maatriks)
+        #print(self.maatriks)
     def võta_värv(self, kuju):
         if kuju == "O":
             return self.sinine
@@ -264,15 +264,19 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        a = True
+        #a = True
 
         #kontrollib kas vasak äär
         #kontrollib kas parem äär
         #kontrollib kas seal juba on klots
+        #print(self.klots["x"])
+        #print(self.klots["y"])
 
-        for kõrgus in self.klots["asend"]:
-            for laius in self.klots["asend"][kõrgus]:
-                if self.maatriks[self.klots["y"]][self.klots["x"]+1] == 1:
+        for rida in self.klots["asend"]:
+            for veerg in rida:
+                #print(self.maatriks[self.klots["y"]])
+                if self.maatriks[self.klots["y"] + self.klots["asend"].index(rida)][self.klots["x"] + veerg] == "äär":
+                    print("see")
                     self.äärP = True
 
 
@@ -301,8 +305,8 @@ class TetrisPõhi:
             print("wut wuuuuut")
             self.klots = self.järgmineKlots
             self.järgmineKlots = self.teeUusKlots()
-            print(self.klots)
-            print(self.järgmineKlots)
+            #print(self.klots)
+            #print(self.järgmineKlots)
             self.vaja_uus_klots = False
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
@@ -327,8 +331,8 @@ class TetrisPõhi:
 
         self.klots = self.teeUusKlots()
         self.järgmineKlots = self.teeUusKlots()
-        print(self.klots)
-        print(self.järgmineKlots)
+        #print(self.klots)
+        #print(self.järgmineKlots)
 
 
         while True:
