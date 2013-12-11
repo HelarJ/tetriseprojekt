@@ -251,29 +251,22 @@ class TetrisPõhi:
         self.äärV = False
         self.äärPõhi = False
 
-    #muuda et kontrolliks ka alumist serva
-    #muuda et kontrolliks teisi klotse (kontrrolli maatriksit)
+
     def is_valid_position(self):
-        #kui valid pos siis return True
-        #print(self.x)
-        try:
-            self.maatriks[self.x + self.klots["x"]][1+ self.y + self.klots["y"]] = self.klots["värv"]
-        except IndexError:
+        a = True
+
+        #kontrollib kas vasak äär
+        #kontrollib kas parem äär
+        #kontrollib kas seal juba on klots
+
+        if self.klots["x"] == 9:
+            self.äärP = True
+
+        if self.klots["x"]-4 == 0:
+            self.äärV = True
+
+        if self.klots["y"] == 22:
             self.äärPõhi = True
-            self.vaja_uus_klots = True
-
-
-        #if self.x > 8:
-        #    self.äärP = True
-        #if self.x < (self.algnex - 5):
-        #    self.äärV = True
-        #if self.y >= 21:
-        #    self.äärPõhi = True
-        #    self.vaja_uus_klots = True
-        #print(self.y)
-        #if self.y < 21:
-        #    self.vaja_uus_klots = False
-
 
 
 
