@@ -33,6 +33,7 @@ class TetrisPõhi:
         self.i = 0
         self.maatriks = []  #mänguväljaku representation
         self.klots = []
+        self.järgmineKlots = []
         self.vaja_uus_klots = False
 
         #kõik klotside kujud ja nende asendid
@@ -155,14 +156,16 @@ class TetrisPõhi:
         #teeb random uue random rotationis klotsi
         #returnib klots, mis on dictionary võtmetega kuju, rotation, x, y (värv ka äkki?)
         #
-
+        klots = 0
         kuju = choice(list(self.shapes.keys()))
-        self.klots = {"kuju": kuju,
+        klots = {"kuju": kuju,
                  "asend": self.shapes[kuju][0],
                  "x": self.algnex,
                  "y": self.algney,
                  "värv": self.võta_värv(kuju)}
-        print(self.klots)
+
+        return klots
+
     def lisaKlotsMaatriksisse(self):
         #vist ei tööta
         koordinaat = False
@@ -210,8 +213,17 @@ class TetrisPõhi:
                 i += 1
             j +=  1
 
-
-
+    def joonista_järgmine_klots(self):
+        #klotside algseid asenedid tuleb muuta et normaalsem oleks
+        j = 0
+        for self.x in range(4):
+            i = 0
+            for self.y in range(4):
+                koordinaat = self.järgmineKlots["asend"][self.y][self.x]
+                if koordinaat != 0:
+                    self.aken.blit(self.järgmineKlots["värv"], (65 + (i * 30), 230 + (j * 30)))
+                i += 1
+            j += 1
 
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
@@ -280,9 +292,13 @@ class TetrisPõhi:
             self.i = 0
         if self.vaja_uus_klots:
             print("wut wuuuuut")
-            self.teeUusKlots()
+            self.klots = self.järgmineKlots
+            self.järgmineKlots = self.teeUusKlots()
+            print(self.klots)
+            print(self.järgmineKlots)
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
+        self.joonista_järgmine_klots()
         self.i += 1
 
     def muusika(self):
@@ -301,7 +317,11 @@ class TetrisPõhi:
         self.muusika()
         self.tühiplats()
 
-        self.teeUusKlots()
+        self.klots = self.teeUusKlots()
+        self.järgmineKlots = self.teeUusKlots()
+        print(self.klots)
+        print(self.järgmineKlots)
+
 
         while True:
             #if self.vaja_uus_klots:
