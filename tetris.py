@@ -12,8 +12,8 @@ class TetrisPõhi:
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algnex = 0  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
-        self.algney = 4
+        self.algnex = 4  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algney = 0
         self.x = self.algnex
         self.y = self.algney
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
@@ -174,7 +174,7 @@ class TetrisPõhi:
         for self.x in range(4):
             for self.y in range(4):
                 #print(self.klots)
-                koordinaat = self.klots["asend"][self.y][self.x]
+                koordinaat = self.klots["asend"][self.x][self.y]
                 #print(koordinaat)
                 #print(self.klots["asend"][y][x])
                 #print(self.shapes[self.klots["kuju"]][koordinaadid])
@@ -239,16 +239,16 @@ class TetrisPõhi:
         self.is_valid_position()
         if suund == ("alla"):
             if not self.äärPõhi:
-                self.klots["x"] += 1
-                #self.y += 1
+                self.klots["y"] += 1
+                #self.maatriks[self.klots["x"]]
 
         if suund == ("paremale"):
             if not self.äärP and not self.äärPõhi:
-                self.klots["y"] += 1
+                self.klots["x"] += 1
 
         if suund == ("vasakule"):
             if not self.äärV and not self.äärPõhi:
-                self.klots["y"] -= 1
+                self.klots["x"] -= 1
 
         #self.lisaKlotsMaatriksisse()
         self.äärP = False
@@ -257,7 +257,7 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        a = True
+        #a = True
 
         #kontrollib kas vasak äär
         #kontrollib kas parem äär
