@@ -264,20 +264,18 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        #a = True
+        a = True
 
         #kontrollib kas vasak äär
         #kontrollib kas parem äär
         #kontrollib kas seal juba on klots
 
-        if self.klots["x"] == 9:
-            self.äärP = True
+        for kõrgus in self.klots["asend"]:
+            for laius in self.klots["asend"][kõrgus]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+1] == 1:
+                    self.äärP = True
 
-        if self.klots["x"] == -1:
-            self.äärV = True
 
-        if self.klots["y"] == 22:
-            self.äärPõhi = True
 
 
 
