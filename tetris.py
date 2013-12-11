@@ -37,6 +37,7 @@ class TetrisPõhi:
         self.järgmineKlots = []
         self.vaja_uus_klots = False
         self.skoor = 0
+        self.eelmine = 0
 
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(0, 0, 0, 0),
@@ -241,8 +242,16 @@ class TetrisPõhi:
                 i += 1
             j += 1
 
+    def kustutaeelmine(self):
+        for self.x in range(4):
+            for self.y in range(4):
+                koordinaat = self.eelmine["asend"][self.x][self.y]
+                if koordinaat != 0:
+                    self.maatriks[self.y + self.eelmine["y"]][self.x + self.eelmine["x"]] = 0
+
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
+        self.kustutaeelmine()
         self.is_valid_position()
         if suund == ("alla"):
             if not self.äärPõhi:
@@ -261,6 +270,7 @@ class TetrisPõhi:
         self.äärP = False
         self.äärV = False
         self.äärPõhi = False
+        self.eelmine = self.klots
 
 
     def is_valid_position(self):
@@ -277,7 +287,7 @@ class TetrisPõhi:
                 #print(self.maatriks[self.klots["y"]])
                 if self.maatriks[self.klots["y"] + self.klots["asend"].index(rida)][self.klots["x"] + veerg] == "äär":
                     print("see")
-                    self.äärP = True
+                    self.äärV = True
 
 
 
@@ -331,6 +341,7 @@ class TetrisPõhi:
 
         self.klots = self.teeUusKlots()
         self.järgmineKlots = self.teeUusKlots()
+        self.eelmine = self.klots
         #print(self.klots)
         #print(self.järgmineKlots)
 
