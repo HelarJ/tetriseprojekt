@@ -196,7 +196,7 @@ class TetrisPõhi:
             if arv == 10:
                 self.skoor += 100
                 for abi in range(rida-1, 0, -1):
-                    maatriks[rida] = maatriks[rida-1]
+                    self.maatriks[rida] = self.maatriks[rida+1]
 
 
     def joonista_maatriks(self):
