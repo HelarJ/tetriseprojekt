@@ -12,8 +12,8 @@ class TetrisPõhi:
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algnex = 400  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
-        self.algney = 20
+        self.algnex = 5  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algney = 0
         self.x = self.algnex
         self.y = self.algney
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
@@ -139,22 +139,27 @@ class TetrisPõhi:
         #
 
         kuju = choice(list(self.shapes.keys()))
-        klots = {"kuju": kuju,
+        self.klots = {"kuju": kuju,
                  "asend": self.shapes[kuju][0],
                  "x": self.algnex,
                  "y": self.algney,
                  "värv": self.punane}
-        self.klots = klots
-        print(self.klots)
 
     def lisaKlotsMaatriksisse(self):
         #vist ei tööta
+        kootdinaadid = False
         print(self.klots)
         for x in range(4):
             for y in range(4):
-                print(self.klots)
-                if self.shapes[self.klots["kuju"]][self.klots["asend"]][y][x] != 0:
-                    self.maatriks[x+self.klots["x"]][y + self.klots["y"]] = self.klots["värv"]
+                #print(self.klots["kuju"])
+                koordinaat = self.klots["asend"][y][x]
+                print(koordinaat)
+                #print(self.klots["asend"][y][x])
+                #print(self.shapes[self.klots["kuju"]][koordinaadid])
+                print(self.klots["x"])
+                print(self.klots["y"])
+                if koordinaat != 0:
+                    self.maatriks[x + self.klots["x"]][y + self.klots["y"]] = self.klots["värv"]
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -176,7 +181,7 @@ class TetrisPõhi:
             i = 0
             for element in rida:
                 if element != 0:
-                    self.aken.blit(element, (self.x, self.y))
+                    self.aken.blit(element, (400 + self.x, 20 + self.y))
                 i += 1
 
 
@@ -185,7 +190,7 @@ class TetrisPõhi:
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
         if suund == ("alla"):
-            if self.y < 650:
+            if self.y < 620:
                 self.y += self.kuup
         self.is_valid_position()
         if suund == ("paremale"):
@@ -194,7 +199,7 @@ class TetrisPõhi:
         if suund == ("vasakule"):
             if not self.äärV and not self.äärPõhi:
                 self.x -= self.kuup
-        self.lisaKlotsMaatriksisse()
+        #self.lisaKlotsMaatriksisse()
         self.äärP = False
         self.äärV = False
         self.äärPõhi = False
@@ -232,6 +237,8 @@ class TetrisPõhi:
         if self.i == self.kiirus:
             self.liigutaplokk("alla")
             self.i = 0
+        self.teeUusKlots()
+        self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
         self.i += 1
 
@@ -249,13 +256,13 @@ class TetrisPõhi:
 
     def põhikordus(self):
         self.muusika()
-        plats = self.tühiplats()
+        self.tühiplats()
 
         self.klots = self.teeUusKlots()
 
         while True:
-            if self.vaja_uus_klots:
-                self.klots = self.teeUusKlots()
+            #if self.vaja_uus_klots:
+                #self.klots = self.teeUusKlots()
 
                 #kui enam ei mahu siis mäng läbi
                 #if not is_valid_position(self, maatriks, kukkuv_klots):
