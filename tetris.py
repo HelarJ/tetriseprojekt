@@ -201,16 +201,16 @@ class TetrisPõhi:
         #tuleb gameloopis kusagil välja kutsuda!
 
     def kontrolli_ridu(self):
-        täis = False
-        for rida in range(10):
+        for rida in range(22):
             arv = 0
-            for element in range(9):
+            for element in range(10):
                  if self.maatriks[rida][element] != 0:
                      arv += 1
             if arv == 10:
+                print("something something")
                 self.skoor += 100
                 for abi in range(rida-1, 0, -1):
-                    self.maatriks[rida] = self.maatriks[rida+1]
+                    self.maatriks[rida] = self.maatriks[rida-1]
 
 
     def joonista_maatriks(self):
@@ -255,8 +255,15 @@ class TetrisPõhi:
 
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
-        self.kustutaeelmine()
+
+
         self.is_valid_position()
+
+        if not self.vaja_uus_klots or (self.x == self.algnex and self.y == self.algney):
+            self.kustutaeelmine()
+
+
+
         if suund == ("alla"):
             if not self.äärPõhi:
                 self.klots["y"] += 1
@@ -382,7 +389,7 @@ class TetrisPõhi:
             print("wut wuuuuut")
             self.klots = self.järgmineKlots
             self.järgmineKlots = self.teeUusKlots()
-            #print(self.klots)
+            self.eelmine = self.klots
             #print(self.järgmineKlots)
             self.vaja_uus_klots = False
         self.lisaKlotsMaatriksisse()
