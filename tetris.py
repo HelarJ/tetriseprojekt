@@ -151,7 +151,7 @@ class TetrisPõhi:
         #print(self.klots)
         for x in range(4):
             for y in range(4):
-                #print(self.klots["kuju"])
+                #print(self.klots)
                 koordinaat = self.klots["asend"][y][x]
                 #print(koordinaat)
                 #print(self.klots["asend"][y][x])
@@ -182,7 +182,8 @@ class TetrisPõhi:
             i = 0
             for element in rida:
                 if element != 0:
-                    self.aken.blit(element, (260 + (self.x *30), 20 + (self.y * 30)))
+
+                    self.aken.blit(element, (250 + (self.klots["y"] *30), 20 + (self.klots["x"] * 30)))
                 i += 1
 
 
@@ -190,16 +191,20 @@ class TetrisPõhi:
 
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
+        self.is_valid_position()
         if suund == ("alla"):
             if not self.äärPõhi:
-                self.y += 1
-        self.is_valid_position()
+                self.klots["x"] += 1
+                #self.y += 1
+
         if suund == ("paremale"):
             if not self.äärP and not self.äärPõhi:
-                self.x += 1
+                self.klots["y"] += 1
+
         if suund == ("vasakule"):
             if not self.äärV and not self.äärPõhi:
-                self.x -= 1
+                self.klots["y"] -= 1
+
         #self.lisaKlotsMaatriksisse()
         self.äärP = False
         self.äärV = False
@@ -243,6 +248,7 @@ class TetrisPõhi:
             self.liigutaplokk("alla")
             self.i = 0
         if self.vaja_uus_klots:
+            print("wut wuuuuut")
             self.teeUusKlots()
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
@@ -264,7 +270,7 @@ class TetrisPõhi:
         self.muusika()
         self.tühiplats()
 
-        self.klots = self.teeUusKlots()
+        self.teeUusKlots()
 
         while True:
             #if self.vaja_uus_klots:
