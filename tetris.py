@@ -12,7 +12,7 @@ class TetrisPõhi:
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algnex = 400 #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algnex = 400  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
         self.algney = 20
         self.x = self.algnex
         self.y = self.algney
@@ -24,9 +24,10 @@ class TetrisPõhi:
         self.äärV = False
         self.äärPõhi = False
         self.fpsClock = pygame.time.Clock()
-        self.kiirus = 15 #mida väiksem seda kiirem
+        self.kiirus = 15  #mida väiksem seda kiirem
         self.i = 0
-        self.maatriks = [] #mänguväljaku representation
+        self.maatriks = []  #mänguväljaku representation
+        self.klots = []
 
         #ajutine
         self.vaja_uus_klots = True
@@ -143,15 +144,17 @@ class TetrisPõhi:
                  "x": self.algnex,
                  "y": self.algney,
                  "värv": self.punane}
-        return klots
+        self.klots = klots
+        print(self.klots)
 
-    def lisaKlotsMaatriksisse(self, maatriks, klots):
+    def lisaKlotsMaatriksisse(self):
         #vist ei tööta
-
+        print(self.klots)
         for x in range(4):
             for y in range(4):
-                if self.shapes[klots["kuju"]][klots["asend"]][y][x] != 0:
-                    maatriks[x+klots["x"]][y + klots["y"]] = klots["värv"]
+                print(self.klots)
+                if self.shapes[self.klots["kuju"]][self.klots["asend"]][y][x] != 0:
+                    self.maatriks[x+self.klots["x"]][y + self.klots["y"]] = self.klots["värv"]
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -167,7 +170,7 @@ class TetrisPõhi:
         #returnib mitu rida kustutati
 
 
-    def joonista_klots(self):
+    def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
         for rida in self.maatriks:
             i = 0
@@ -191,13 +194,14 @@ class TetrisPõhi:
         if suund == ("vasakule"):
             if not self.äärV and not self.äärPõhi:
                 self.x -= self.kuup
+        self.lisaKlotsMaatriksisse()
         self.äärP = False
         self.äärV = False
         self.äärPõhi = False
 
     #muuda et kontrolliks ka alumist serva
     #muuda et kontrolliks teisi klotse (kontrrolli maatriksit)
-    def is_valid_position(self, maatriks, kukkuv_klots, järgmine_koht):
+    def is_valid_position(self):
         #kui valid pos siis return True
         #print(self.x)
         if self.x > (self.algnex + 110):
@@ -228,11 +232,11 @@ class TetrisPõhi:
         if self.i == self.kiirus:
             self.liigutaplokk("alla")
             self.i = 0
-        self.joonista_klots()
+        self.joonista_maatriks()
         self.i += 1
 
     def muusika(self):
-        pygame.mixer.music.load(os.path.join('andmed', 'tetrisA.mp3'))
+        pygame.mixer.music.load(os.path.join('andmed', 'tetrisA.wav'))
         pygame.mixer.music.play(-1, 0.0)
         #does not loop very well
         #tried to change loop behaviour to no avail, media playeris loobib samamoodi väikse pausiga
@@ -247,11 +251,11 @@ class TetrisPõhi:
         self.muusika()
         plats = self.tühiplats()
 
-        kukkuv_klots = self.teeUusKlots()
+        self.klots = self.teeUusKlots()
 
         while True:
             if self.vaja_uus_klots:
-                kukkuv_klots = self.teeUusKlots()
+                self.klots = self.teeUusKlots()
 
                 #kui enam ei mahu siis mäng läbi
                 #if not is_valid_position(self, maatriks, kukkuv_klots):
