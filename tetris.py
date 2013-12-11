@@ -276,13 +276,62 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        #a = True
+        a = True
 
         #kontrollib kas vasak äär
         #kontrollib kas parem äär
         #kontrollib kas seal juba on klots
-        #print(self.klots["x"])
-        #print(self.klots["y"])
+
+        if self.klots["kuju"] == "O":
+
+
+        elif self.klots["kuju"] == "I":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+
+        elif self.klots["kuju"] == "S":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+
+        elif self.klots["kuju"] == "Z":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+
+        elif self.klots["kuju"] == "L":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+            elif self.klots["asend"] == 2:
+
+            elif self.klots["asend"] == 3:
+
+
+        elif self.klots["kuju"] == "J":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+            elif self.klots["asend"] == 2:
+
+            elif self.klots["asend"] == 3:
+
+
+        elif self.klots["kuju"] == "T":
+            if self.klots["asend"] == 0:
+
+            elif self.klots["asend"] == 1:
+
+            elif self.klots["asend"] == 2:
+
+            elif self.klots["asend"] == 3:
+
 
 
 
