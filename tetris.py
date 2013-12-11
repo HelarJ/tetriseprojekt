@@ -35,6 +35,7 @@ class TetrisPõhi:
         self.klots = []
         self.järgmineKlots = []
         self.vaja_uus_klots = False
+        self.skoor = 0
 
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(0, 0, 0, 0),
@@ -185,24 +186,28 @@ class TetrisPõhi:
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
 
-    def kasTäisRida(self, maatriks, y):
-        a = True
-
-    def kustutaTäisRida(self, maatriks):
-        a = True
-        return a
-        #kustutab kõik täis read
-        #liigutab kõik mis nende peal on alla
-        #returnib mitu rida kustutati
+    def kontrolli_ridu(self):
+        täis = False
+        for rida in range(10):
+            arv = 0
+            for element in range(9):
+                 if self.maatriks[rida][element] != 0:
+                     arv += 1
+            if arv == 10:
+                self.skoor += 100
+                for abi in range(rida-1, 0, -1):
+                    maatriks[rida] = maatriks[rida-1]
 
 
     def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
         #print(self.maatriks)
+        self.kontrolli_ridu()
         j = 0
         for rida in self.maatriks:
             #print(rida)
             i = 0
+            arv = 0
             for element in rida:
 
                 if element != 0:
