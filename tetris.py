@@ -167,17 +167,17 @@ class TetrisPõhi:
         #vist ei tööta
         koordinaat = False
         #print(self.klots)
-        for x in range(4):
-            for y in range(4):
+        for self.x in range(4):
+            for self.y in range(4):
                 #print(self.klots)
-                koordinaat = self.klots["asend"][y][x]
+                koordinaat = self.klots["asend"][self.y][self.x]
                 #print(koordinaat)
                 #print(self.klots["asend"][y][x])
                 #print(self.shapes[self.klots["kuju"]][koordinaadid])
                 #print(self.klots["x"])
                 #print(self.klots["y"])
                 if koordinaat != 0:
-                    self.maatriks[x + self.klots["x"]][y + self.klots["y"]] = self.klots["värv"]
+                    self.maatriks[self.x + self.klots["x"]][self.y + self.klots["y"]] = self.klots["värv"]
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -239,17 +239,23 @@ class TetrisPõhi:
     def is_valid_position(self):
         #kui valid pos siis return True
         #print(self.x)
-        print(self.x)
-        if self.x > 8:
-            self.äärP = True
-        if self.x < (self.algnex - 5):
-            self.äärV = True
-        if self.y >= 21:
+        try:
+            self.maatriks[self.x + self.klots["x"]][1+ self.y + self.klots["y"]] = self.klots["värv"]
+        except IndexError:
             self.äärPõhi = True
             self.vaja_uus_klots = True
-        print(self.y)
-        if self.y < 21:
-            self.vaja_uus_klots = False
+
+
+        #if self.x > 8:
+        #    self.äärP = True
+        #if self.x < (self.algnex - 5):
+        #    self.äärV = True
+        #if self.y >= 21:
+        #    self.äärPõhi = True
+        #    self.vaja_uus_klots = True
+        #print(self.y)
+        #if self.y < 21:
+        #    self.vaja_uus_klots = False
 
 
 
