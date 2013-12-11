@@ -126,9 +126,9 @@ class TetrisPõhi:
                   "T": self.T_shape}
 
     def tühiplats(self):
-        for i in range(21):
+        for i in range(22):
             rida = []
-            for j in range(9):
+            for j in range(10):
                 rida.append(0)
             self.maatriks.append(rida)
 
@@ -177,14 +177,21 @@ class TetrisPõhi:
 
     def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
-        print(self.maatriks)
+        #print(self.maatriks)
+        j = 0
         for rida in self.maatriks:
+            print(rida)
             i = 0
             for element in rida:
+                print(i)
+                print(j)
                 if element != 0:
 
-                    self.aken.blit(element, (250 + (self.klots["y"] *30), 20 + (self.klots["x"] * 30)))
+                    self.aken.blit(self.punane, (250 + (i * 30), 20 + (j * 30)))
+                if element == 0:
+                    self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
+            j +=  1
 
 
 
