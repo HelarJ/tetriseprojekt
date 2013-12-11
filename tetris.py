@@ -201,6 +201,7 @@ class TetrisPõhi:
         #tuleb gameloopis kusagil välja kutsuda!
 
     def kontrolli_ridu(self):
+        arv = 0
         for rida in range(22):
             arv = 0
             for element in range(10):
@@ -216,7 +217,7 @@ class TetrisPõhi:
     def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
         #print(self.maatriks)
-        self.kontrolli_ridu()
+
         j = 0
         for rida in self.maatriks:
             #print(rida)
@@ -391,6 +392,7 @@ class TetrisPõhi:
             self.järgmineKlots = self.teeUusKlots()
             self.eelmine = self.klots
             #print(self.järgmineKlots)
+            self.kontrolli_ridu()
             self.vaja_uus_klots = False
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
