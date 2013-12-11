@@ -12,8 +12,8 @@ class TetrisPõhi:
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
         self.kuup = 30
-        self.algnex = 4  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
-        self.algney = 0
+        self.algnex = 0  #mänguväljaku keskel asuv punkt, millest plokid tulevad välja
+        self.algney = 4
         self.x = self.algnex
         self.y = self.algney
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
@@ -198,13 +198,14 @@ class TetrisPõhi:
         #print(self.maatriks)
         j = 0
         for rida in self.maatriks:
-            print(rida)
+            #print(rida)
             i = 0
             for element in rida:
+
                 if element != 0:
 
                     self.aken.blit(element, (250 + (i * 30), 20 + (j * 30)))
-                if element == 0:
+                if element == 0:  #Temporary, maatriksi sisu näitamiseks
                     self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
             j +=  1
@@ -238,7 +239,8 @@ class TetrisPõhi:
     def is_valid_position(self):
         #kui valid pos siis return True
         #print(self.x)
-        if self.x > (self.algnex + 4):
+        print(self.x)
+        if self.x > 8:
             self.äärP = True
         if self.x < (self.algnex - 5):
             self.äärV = True
