@@ -127,8 +127,8 @@ class TetrisPõhi:
 
         self.shapes = {
                   "O": self.O_shape,
-                  "I": self.I_shape#,
-                  #"S": self.S_shape,
+                  "I": self.I_shape,
+                  "S": self.S_shape,
                   #"Z": self.Z_shape,
                   #"J": self.J_shape,
                   #"L": self.L_shape,
@@ -335,7 +335,8 @@ class TetrisPõhi:
 
 
         elif self.klots["kuju"] == "I":
-            if self.klots["asend"] == 0:
+            if self.klots["asend"] == self.shapes["I"][1]:
+                print("adjfholw")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+4] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -349,7 +350,8 @@ class TetrisPõhi:
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]+3] != 0:
                     self.äärPõhi = True
 
-            elif self.klots["asend"] == 1:
+            elif self.klots["asend"] == self.shapes["I"][0]:
+                print("siiiii")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -371,13 +373,43 @@ class TetrisPõhi:
 
 
 
-        """elif self.klots["kuju"] == "S":
-            if self.klots["asend"] == 0:
+        elif self.klots["kuju"] == "S":
+            if self.klots["asend"] == self.shapes["S"][1]:
+                print("siii")
+                if self.maatriks[self.klots["y"]][self.klots["x"]+3] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
 
-            elif self.klots["asend"] == 1:
+
+            elif self.klots["asend"] == self.shapes["S"][0]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+3][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                if self.maatriks[self.klots["y"]+3][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
 
 
-        elif self.klots["kuju"] == "Z":
+        """elif self.klots["kuju"] == "Z":
             if self.klots["asend"] == 0:
 
             elif self.klots["asend"] == 1:
