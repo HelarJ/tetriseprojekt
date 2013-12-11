@@ -18,6 +18,11 @@ class TetrisPõhi:
         self.y = self.algney
         self.punane = pygame.image.load(os.path.join("andmed", "punane.png"))
         self.sinine = pygame.image.load(os.path.join("andmed", "sinine.png"))
+        self.kollane = pygame.image.load(os.path.join("andmed", "kollane.png"))
+        self.roheline = pygame.image.load(os.path.join("andmed", "roheline.png"))
+        self.roosa = pygame.image.load(os.path.join("andmed", "roosa.png"))
+        self.oranz = pygame.image.load(os.path.join("andmed", "oranz.png"))
+        self.helesinine = pygame.image.load(os.path.join("andmed", "helesinine.png"))
         self.hall = pygame.image.load(os.path.join("andmed", "hall.png"))
         self.taust = pygame.image.load(os.path.join("andmed", "TetrisTaust.png"))
         self.äärP = False
@@ -28,10 +33,7 @@ class TetrisPõhi:
         self.i = 0
         self.maatriks = []  #mänguväljaku representation
         self.klots = []
-
-        #ajutine
         self.vaja_uus_klots = False
-        #
 
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(0, 0, 0, 0),
@@ -132,6 +134,22 @@ class TetrisPõhi:
                 rida.append(0)
             self.maatriks.append(rida)
 
+    def võta_värv(self, kuju):
+        if kuju == "O":
+            return self.sinine
+        if kuju == "I":
+            return self.punane
+        if kuju == "S":
+            return self.helesinine
+        if kuju == "Z":
+            return self.roheline
+        if kuju == "L":
+            return self.oranz
+        if kuju == "J":
+            return self.roosa
+        if kuju == "T":
+            return self.kollane
+
 
     def teeUusKlots(self):
         #teeb random uue random rotationis klotsi
@@ -143,7 +161,7 @@ class TetrisPõhi:
                  "asend": self.shapes[kuju][0],
                  "x": self.algnex,
                  "y": self.algney,
-                 "värv": self.punane}
+                 "värv": self.võta_värv(kuju)}
         print(self.klots)
     def lisaKlotsMaatriksisse(self):
         #vist ei tööta
@@ -183,11 +201,9 @@ class TetrisPõhi:
             print(rida)
             i = 0
             for element in rida:
-                print(i)
-                print(j)
                 if element != 0:
 
-                    self.aken.blit(self.punane, (250 + (i * 30), 20 + (j * 30)))
+                    self.aken.blit(element, (250 + (i * 30), 20 + (j * 30)))
                 if element == 0:
                     self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
