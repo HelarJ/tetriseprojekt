@@ -181,7 +181,11 @@ class TetrisPõhi:
                 #print(self.klots["x"])
                 #print(self.klots["y"])
                 if koordinaat != 0:
-                    self.maatriks[self.x + self.klots["x"]][self.y + self.klots["y"]] = self.klots["värv"]
+                    try:
+                        self.maatriks[self.x + self.klots["x"]][self.y + self.klots["y"]] = self.klots["värv"]
+                    except IndexError:
+                        self.äärPõhi = True
+                        self.vaja_uus_klots = True
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -232,7 +236,7 @@ class TetrisPõhi:
 
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
-        self.is_valid_position()
+        #self.is_valid_position()
         if suund == ("alla"):
             if not self.äärPõhi:
                 self.klots["x"] += 1
