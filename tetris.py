@@ -273,7 +273,7 @@ class TetrisPõhi:
         if self.klots["x"] == 9:
             self.äärP = True
 
-        if self.klots["x"]-4 == 0:
+        if self.klots["x"] == -1:
             self.äärV = True
 
         if self.klots["y"] == 22:
