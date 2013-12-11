@@ -236,7 +236,7 @@ class TetrisPõhi:
 
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
-        #self.is_valid_position()
+        self.is_valid_position()
         if suund == ("alla"):
             if not self.äärPõhi:
                 self.klots["x"] += 1
