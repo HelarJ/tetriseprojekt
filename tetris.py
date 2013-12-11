@@ -323,8 +323,12 @@ class TetrisPõhi:
         self.i += 1
 
     def muusika(self):
-        pygame.mixer.music.load(os.path.join('andmed', 'tetrisA.mp3'))
-        pygame.mixer.music.play(-1, 0.0)
+        nimed = []
+        nimed.append( 'tetrisA.mp3')
+        nimed.append("Tetris - Theme 'A' Acapella.mp3")
+        nimed.append("Tetris - Theme 'B' Acapella.mp3")
+        pygame.mixer.music.load(os.path.join('andmed', choice(nimed)))
+        pygame.mixer.music.play(-1, 1.0)
         #does not loop very well
         #tried to change loop behaviour to no avail, media playeris loobib samamoodi väikse pausiga
         #viskasin documentationile pilgu peale, no obv way to fix this
