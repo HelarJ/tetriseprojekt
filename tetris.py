@@ -296,13 +296,14 @@ class TetrisPõhi:
             self.järgmineKlots = self.teeUusKlots()
             print(self.klots)
             print(self.järgmineKlots)
+            self.vaja_uus_klots = False
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
         self.joonista_järgmine_klots()
         self.i += 1
 
     def muusika(self):
-        pygame.mixer.music.load(os.path.join('andmed', 'tetrisA.wav'))
+        pygame.mixer.music.load(os.path.join('andmed', 'tetrisA.mp3'))
         pygame.mixer.music.play(-1, 0.0)
         #does not loop very well
         #tried to change loop behaviour to no avail, media playeris loobib samamoodi väikse pausiga
