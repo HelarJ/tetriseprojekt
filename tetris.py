@@ -148,16 +148,16 @@ class TetrisPõhi:
     def lisaKlotsMaatriksisse(self):
         #vist ei tööta
         kootdinaadid = False
-        print(self.klots)
+        #print(self.klots)
         for x in range(4):
             for y in range(4):
                 #print(self.klots["kuju"])
                 koordinaat = self.klots["asend"][y][x]
-                print(koordinaat)
+                #print(koordinaat)
                 #print(self.klots["asend"][y][x])
                 #print(self.shapes[self.klots["kuju"]][koordinaadid])
-                print(self.klots["x"])
-                print(self.klots["y"])
+                #print(self.klots["x"])
+                #print(self.klots["y"])
                 if koordinaat != 0:
                     self.maatriks[x + self.klots["x"]][y + self.klots["y"]] = self.klots["värv"]
 
@@ -177,11 +177,12 @@ class TetrisPõhi:
 
     def joonista_maatriks(self):
         #teised klotsid ka vaja lisada
+        #print(self.maatriks)
         for rida in self.maatriks:
             i = 0
             for element in rida:
                 if element != 0:
-                    self.aken.blit(element, (400 + self.x, 20 + self.y))
+                    self.aken.blit(element, (200 + (self.x *30), 20 + (self.y * 30)))
                 i += 1
 
 
@@ -190,15 +191,15 @@ class TetrisPõhi:
     def liigutaplokk(self, suund):
         #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
         if suund == ("alla"):
-            if self.y < 620:
-                self.y += self.kuup
+            if self.y < 21:
+                self.y += 1
         self.is_valid_position()
         if suund == ("paremale"):
             if not self.äärP and not self.äärPõhi:
-                self.x += self.kuup
+                self.x += 1
         if suund == ("vasakule"):
             if not self.äärV and not self.äärPõhi:
-                self.x -= self.kuup
+                self.x -= 1
         #self.lisaKlotsMaatriksisse()
         self.äärP = False
         self.äärV = False
