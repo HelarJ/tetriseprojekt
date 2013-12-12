@@ -40,6 +40,7 @@ class TetrisPõhi:
         self.skoor = 0
         self.eelmine = 0
         self.font = pygame.font.SysFont("monospace", 20)
+        self.pööre = 0
 
 
         #kõik klotside kujud ja nende asendid
@@ -171,9 +172,10 @@ class TetrisPõhi:
         #returnib klots, mis on dictionary võtmetega kuju, rotation, x, y (värv ka äkki?)
         #
         klots = 0
+        self.pööre = 0
         kuju = choice(list(self.shapes.keys()))
         klots = {"kuju": kuju,
-                 "asend": self.shapes[kuju][0],
+                 "asend": self.shapes[kuju][self.pööre],
                  "x": self.algnex,
                  "y": self.algney,
                  "värv": self.võta_värv(kuju)}
@@ -256,6 +258,14 @@ class TetrisPõhi:
                 i += 1
             j +=  1
 
+    def pööra_klots(self):
+        self.pööre += 1
+        try:
+            self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
+        except IndexError:
+            self.pööre = 0
+            self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
+
     def joonista_järgmine_klots(self):
         #klotside algseid asenedid tuleb muuta et normaalsem oleks
         j = 0
@@ -283,7 +293,6 @@ class TetrisPõhi:
 
         if not self.vaja_uus_klots or (self.x == self.algnex and self.y == self.algney):
             self.kustutaeelmine()
-
 
 
         if suund == ("alla"):
@@ -540,26 +549,6 @@ class TetrisPõhi:
 
 
 
-        elif self.klots["kuju"] == "J":
-            if self.klots["asend"] == 0:
-
-            elif self.klots["asend"] == 1:
-
-            elif self.klots["asend"] == 2:
-
-            elif self.klots["asend"] == 3:
-
-
-        """elif self.klots["kuju"] == "T":
-            if self.klots["asend"] == 0:
-
-            elif self.klots["asend"] == 1:
-
-            elif self.klots["asend"] == 2:
-
-            elif self.klots["asend"] == 3:"""
-
-
 
 
 
@@ -578,6 +567,8 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
+        if nupp == K_UP:
+            self.pööra_klots()
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
