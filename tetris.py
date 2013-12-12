@@ -697,7 +697,9 @@ class TetrisPõhi:
 
     def näita_teksti(self, tekst):
         pause = self.suurfont.render("Paused", 1, (255, 255, 255))
+        unpause = self.font.render("Press p to unpause", 1, (255, 255, 255))
         self.aken.blit(pause, (400, 350))
+        self.aken.blit(unpause, (470, 450))
         lõpp = False
         while True:
             for event in pygame.event.get():
