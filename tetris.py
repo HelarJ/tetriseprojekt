@@ -41,6 +41,7 @@ class TetrisPõhi:
         self.eelmine = 0
         self.font = pygame.font.SysFont("monospace", 20)
         self.väikefont = pygame.font.SysFont("monospace", 10)
+        self.suurfont = pygame.font.SysFont("monospace", 100)
         self.pööre = 0
         self.loonimi = 0
 
@@ -693,20 +694,15 @@ class TetrisPõhi:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
-    def tee_tekst(self, tekst, font, värv):
-        pind = font.render(tekst, True, värv)
-        return pind, pind.get_rect()
-
 
     def näita_teksti(self, tekst):
-            teksti_pind, teksti_kast = self.tee_tekst(tekst, pygame.font.Font("freesansbold.ttf", 100), self.oranz)
-            teksti_kast.center = (400, 350)
-            pygame.display.blit(teksti_pind, teksti_kast)
-            for event in pygame.event.get():
-                if event.type == KEYDOWN:
-                    while event.key == K_ESCAPE:
-                        pygame.display.update()
-                        self.fpsClock.tick()
+        pause = self.suurfont.render("Paused", 1, (255, 255, 255))
+        self.aken.blit(pause, (400, 350))
+        for event in pygame.event.get():
+            if event.type == KEYDOWN:
+                while event.key == K_ESCAPE:
+                    pygame.display.update()
+                    self.fpsClock.tick()
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
@@ -720,7 +716,7 @@ class TetrisPõhi:
             self.näita_teksti("Paused")
 
             #edasi kood:
-            self.muusika()
+            #self.muusika()
 
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
