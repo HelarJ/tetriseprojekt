@@ -40,6 +40,7 @@ class TetrisPõhi:
         self.skoor = 0
         self.eelmine = 0
         self.font = pygame.font.SysFont("monospace", 20)
+        self.pööre = 0
 
 
         #kõik klotside kujud ja nende asendid
@@ -255,6 +256,15 @@ class TetrisPõhi:
                     self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
             j +=  1
+
+    def pööra_klots(self):
+        self.kustutaeelmine()
+        self.pööre += 1
+        try:
+            self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
+        except IndexError:
+            self.pööre = 0
+            self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
 
     def joonista_järgmine_klots(self):
         #klotside algseid asenedid tuleb muuta et normaalsem oleks
@@ -644,6 +654,8 @@ class TetrisPõhi:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
             self.liigutaplokk("alla")
+        if nupp == K_UP:
+            self.pööra_klots()
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
