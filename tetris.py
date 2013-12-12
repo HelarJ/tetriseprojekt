@@ -722,6 +722,7 @@ class TetrisPõhi:
         if nupp == K_RIGHT:
             self.liigutaplokk("paremale")
         if nupp == K_DOWN:
+
             self.liigutaplokk("alla")
         if nupp == K_UP:
             self.pööra_klots()
@@ -768,7 +769,6 @@ class TetrisPõhi:
         #maybe replace with afro circus
 
     def põhikordus(self):
-
         self.muusika()
         self.tühiplats()
 
@@ -777,7 +777,7 @@ class TetrisPõhi:
         self.eelmine = self.klots
         #print(self.klots)
         #print(self.järgmineKlots)
-
+        pygame.key.set_repeat(50, 50)
 
         while True:
             #if self.vaja_uus_klots:
@@ -790,6 +790,7 @@ class TetrisPõhi:
                 if event.type == QUIT:
                     sys.exit()
                 elif event.type == KEYDOWN:
+
                     self.nupuvajutus(event.key)
 
 
