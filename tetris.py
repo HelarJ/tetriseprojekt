@@ -655,11 +655,12 @@ class TetrisPõhi:
         while True:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
+                    if event.key == K_ESCAPE:
+                        sys.exit()
                     if event.key == K_p:
                         lõpp = True
                         break
-                    elif event.type == K_ESCAPE:
-                        pygame.event.post(pygame.event.Event(QUIT))
+
             if lõpp == True:
                 break
             pygame.display.update()
@@ -672,9 +673,10 @@ class TetrisPõhi:
             #Väljub programmist
 
         if nupp == K_p:
+            pygame.mixer.music.pause()
             self.aken.fill(pygame.Color(0, 0, 0))
-            self.näita_teksti("Paused", "Press p to unpause")
-
+            self.näita_teksti("Paused", "Jätkamiseks vajuta P")
+            pygame.mixer.music.unpause()
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
 
@@ -716,7 +718,7 @@ class TetrisPõhi:
             self.is_valid_position()
             if self.äärPõhi:
                 self.aken.fill(pygame.Color(0, 0, 0))
-                self.näita_teksti("Game over!")
+                self.näita_teksti("Game over!", "Väljumiseks vajuta ESC")
                 #lõpp = False
                 #while True:
                 #    print("õlled")
