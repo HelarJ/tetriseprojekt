@@ -291,7 +291,7 @@ class TetrisPõhi:
         self.äärPõhi = False
         self.eelmine = self.klots
 
-
+    #Don't look..
     def is_valid_position(self):
         if self.klots["kuju"] == "O":
             if self.maatriks[self.klots["y"]][self.klots["x"]+2] != 0:
@@ -671,7 +671,7 @@ class TetrisPõhi:
             self.fpsClock.tick()
 
 
-    def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
+    def nupuvajutus(self, nupp):
         if nupp == K_ESCAPE:
             pygame.event.post(pygame.event.Event(QUIT))
             #Väljub programmist
@@ -703,7 +703,7 @@ class TetrisPõhi:
             pygame.mixer.music.play(0, 0.0)
 
 
-    def joonista(self):  #abifunktsioon kaadri joonistamiseks
+    def joonista(self):
         self.aken.blit(self.taust, (0,0))
 
         if self.i == self.kiirus:
@@ -723,17 +723,6 @@ class TetrisPõhi:
             if self.äärPõhi:
                 self.aken.fill(pygame.Color(0, 0, 0))
                 self.näita_teksti("Game over!", "Väljumiseks vajuta ESC")
-                #lõpp = False
-                #while True:
-                #    print("õlled")
-                #    for event in pygame.event.get():
-                #        if event.type == QUIT:
-                #            sys.exit()
-                #    if lõpp == True:
-                #        break
-                #    pygame.display.update()
-                #    self.fpsClock.tick()
-
 
 
         self.lisaKlotsMaatriksisse()
