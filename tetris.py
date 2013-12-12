@@ -126,8 +126,8 @@ class TetrisPõhi:
                     (0, 0, 0, 0)]]
 
         self.shapes = {
-                  "O": self.O_shape,
-                  "I": self.I_shape,
+                  #"O": self.O_shape,
+                  #"I": self.I_shape,
                   "S": self.S_shape,
                   #"Z": self.Z_shape,
                   #"J": self.J_shape,
@@ -191,11 +191,7 @@ class TetrisPõhi:
                 #print(self.klots["x"])
                 #print(self.klots["y"])
                 if koordinaat != 0:
-                    try:
-                        self.maatriks[self.y + self.klots["y"]][self.x + self.klots["x"]] = self.klots["värv"]
-                    except IndexError:
-                        self.äärPõhi = True
-                        self.vaja_uus_klots = True
+                    self.maatriks[self.y + self.klots["y"]][self.x + self.klots["x"]] = self.klots["värv"]
 
         #kui klots paika saab, lisatakse maatriksisse
         #tuleb gameloopis kusagil välja kutsuda!
@@ -343,15 +339,19 @@ class TetrisPõhi:
                     self.äärV = True
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]+3] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
             elif self.klots["asend"] == self.shapes["I"][0]:
-                print("siiiii")
+                print("saaaa")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -370,6 +370,7 @@ class TetrisPõhi:
                     self.äärV = True
                 if self.maatriks[self.klots["y"]+4][self.klots["x"]] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
 
 
@@ -386,11 +387,18 @@ class TetrisPõhi:
                     self.äärV = True
                 if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
                 if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+
 
 
             elif self.klots["asend"] == self.shapes["S"][0]:
+                print("mooooooo")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -405,8 +413,10 @@ class TetrisPõhi:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]+3][self.klots["x"]] != 0:
                     self.äärPõhi = True
-                if self.maatriks[self.klots["y"]+3][self.klots["x"]+1] != 0:
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+4][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
 
         """elif self.klots["kuju"] == "Z":
