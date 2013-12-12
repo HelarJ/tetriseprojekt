@@ -275,7 +275,6 @@ class TetrisPõhi:
         if suund == ("alla"):
             if not self.äärPõhi:
                 self.klots["y"] += 1
-                #self.maatriks[self.klots["x"]]
 
         if suund == ("paremale"):
             if not self.äärP and not self.äärPõhi:
