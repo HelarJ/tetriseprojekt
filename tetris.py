@@ -698,11 +698,15 @@ class TetrisPõhi:
     def näita_teksti(self, tekst):
         pause = self.suurfont.render("Paused", 1, (255, 255, 255))
         self.aken.blit(pause, (400, 350))
+        lõpp = False
         while True:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
+                        lõpp = True
                         break
+            if lõpp == True:
+                break
             pygame.display.update()
             self.fpsClock.tick()
 
