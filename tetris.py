@@ -8,6 +8,7 @@ from random import *
 class TetrisPõhi:
     def __init__(self):
         pygame.init()
+        pygame.display.set_caption("Helari ja Karli Tetrise projekt ULTRA POWERFUL EXTREME EDITION 2000")
         self.laius = 800
         self.kõrgus = 700
         self.aken = pygame.display.set_mode((self.laius, self.kõrgus))
@@ -39,6 +40,7 @@ class TetrisPõhi:
         self.skoor = 0
         self.eelmine = 0
         self.font = pygame.font.SysFont("monospace", 20)
+
 
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(1, 1, 0, 0),
@@ -600,7 +602,7 @@ class TetrisPõhi:
         järgminetekst = self.font.render("Järgmine plokk", 20, (255, 255, 255))
         self.aken.blit(järgminetekst, (45, 200))
         skoor = self.font.render("Skoor = " + str(self.skoor), 1, (255, 255, 255))
-        self.aken.blit(skoor, (65, 360))
+        self.aken.blit(skoor, (70, 360))
 
     def muusika(self):
         nimed = []
@@ -619,6 +621,7 @@ class TetrisPõhi:
         #maybe replace with afro circus
 
     def põhikordus(self):
+
         self.muusika()
         self.tühiplats()
 
