@@ -648,9 +648,9 @@ class TetrisPõhi:
                     self.vaja_uus_klots = True
 
 
-    def näita_teksti(self, tekst):
-        pause = self.suurfont.render("Paused", 1, (255, 255, 255))
-        unpause = self.font.render("Press p to unpause", 1, (255, 255, 255))
+    def näita_teksti(self, tekst, tekst2 = ""):
+        pause = self.suurfont.render(tekst, 1, (255, 255, 255))
+        unpause = self.font.render(tekst2, 1, (255, 255, 255))
         self.aken.blit(pause, (400, 350))
         self.aken.blit(unpause, (470, 450))
         lõpp = False
@@ -673,7 +673,7 @@ class TetrisPõhi:
 
         if nupp == K_p:
             self.aken.fill(pygame.Color(0, 0, 0))
-            self.näita_teksti("Paused")
+            self.näita_teksti("Paused", "Press p to unpause")
 
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
@@ -712,14 +712,30 @@ class TetrisPõhi:
             self.kontrolli_ridu()
             self.vaja_uus_klots = False
 
-        self.is_valid_position()
-        if self.klots["x"] == self.algnex and self.klots["y"] == self.algney and self.äärPõhi:
-            print("läbi")
-        else:
-            self.lisaKlotsMaatriksisse()
-            self.joonista_maatriks()
-            self.joonista_järgmine_klots()
-            self.i += 1
+
+        if self.klots["x"] == self.algnex and self.klots["y"] == self.algney:
+            self.is_valid_position()
+            if self.äärPõhi:
+                self.aken.fill(pygame.Color(0, 0, 0))
+                self.näita_teksti("Game over!", "Press R to restart")
+                lõpp = False
+                while True:
+                    for event in pygame.event.get():
+                        if event.type == KEYDOWN:
+                            if event.key == K_r:
+                                lõpp = True
+                                break
+                    if lõpp == True:
+                        break
+                    pygame.display.update()
+                    self.fpsClock.tick()
+
+
+
+        self.lisaKlotsMaatriksisse()
+        self.joonista_maatriks()
+        self.joonista_järgmine_klots()
+        self.i += 1
 
         järgminetekst = self.font.render("Järgmine plokk", 1, (255, 255, 255))
         self.aken.blit(järgminetekst, (45, 200))
