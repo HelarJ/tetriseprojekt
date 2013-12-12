@@ -711,9 +711,11 @@ class TetrisPõhi:
             teksti_pind, teksti_kast = tee_tekst(tekst, pygame.font.Font("freesansbold".ttf, 100), self.orange)
             teksti_kast.center = (400, 350)
             pygame.display.blit(teksti_pind, teksti_kast)
-            while :
-                pygame.display.update()
-                self.fpsClock.tick()
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    while event.key == K_ESCAPE:
+                        pygame.display.update()
+                        self.fpsClock.tick()
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
@@ -721,7 +723,7 @@ class TetrisPõhi:
             #Väljub programmist
             #not anymore
 
-            pygame.display.fill(self.must)
+            pygame.display.fill((0, 0, 0))
             pygame.music.stop()
             #pausi kood:
             self.näita_teksti("Paused")
