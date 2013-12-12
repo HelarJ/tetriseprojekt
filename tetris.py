@@ -40,7 +40,9 @@ class TetrisPõhi:
         self.skoor = 0
         self.eelmine = 0
         self.font = pygame.font.SysFont("monospace", 20)
+        self.väikefont = pygame.font.SysFont("monospace", 10)
         self.pööre = 0
+        self.loonimi = 0
 
 
         #kõik klotside kujud ja nende asendid
@@ -208,17 +210,6 @@ class TetrisPõhi:
         return True
 
     def kontrolli_ridu(self):
-        """arv = 0
-        for rida in range(22):
-            arv = 0
-            for element in range(10):
-                 if self.maatriks[rida][element] != 0:
-                     arv += 1
-            if arv == 10:
-                print("something something")
-                self.skoor += 100
-                for abi in range(rida-1, 0, -1):
-                    self.maatriks[rida] = self.maatriks[rida-1]"""
 
         eemald_ridu = 0
         y = 21
@@ -247,13 +238,13 @@ class TetrisPõhi:
             arv = 0
             for element in rida:
                 if element == 'äär':
-                    self.aken.blit(self.must, (250 + (i * 30), 20 + (j * 30)))
+                    "something"
 
                 elif element != 0:
 
-                    self.aken.blit(element, (250 + (i * 30), 20 + (j * 30)))
-                if element == 0:  #Temporary, maatriksi sisu näitamiseks
-                    self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
+                    self.aken.blit(element, (220 + (i * 30), 20 + (j * 30)))
+                #if element == 0:  #Temporary, maatriksi sisu näitamiseks
+                    #self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
             j +=  1
 
@@ -742,6 +733,15 @@ class TetrisPõhi:
             self.pööra_klots()
 
 
+        if nupp == K_n:
+            eelmine = self.loonimi
+            self.loonimi = choice(self.nimed)
+            while eelmine == self.loonimi:
+                self.loonimi = choice(self.nimed)
+            pygame.mixer.music.fadeout(100)
+            pygame.mixer.music.load(os.path.join('andmed', self.loonimi))
+            pygame.mixer.music.play(0, 0.0)
+
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
         self.aken.blit(self.taust, (0,0))
@@ -762,18 +762,40 @@ class TetrisPõhi:
         self.joonista_järgmine_klots()
         self.i += 1
 
-        järgminetekst = self.font.render("Järgmine plokk", 20, (255, 255, 255))
+        järgminetekst = self.font.render("Järgmine plokk", 1, (255, 255, 255))
         self.aken.blit(järgminetekst, (45, 200))
         skoor = self.font.render("Skoor = " + str(self.skoor), 1, (255, 255, 255))
         self.aken.blit(skoor, (70, 360))
+        loonimetekst = self.font.render(self.loonimi, 1, (255, 255, 255))
+        self.aken.blit(loonimetekst, (1, 1))
+
+        ülestekst = self.väikefont.render("Üles nool: pööra klotsi", 1, (255, 255, 255))
+        self.aken.blit(ülestekst, (555, 260))
+        allatekst = self.väikefont.render("Alla nool: kiirenda kukkumist", 1, (255, 255, 255))
+        self.aken.blit(allatekst, (555, 240))
+        vasakuletekst = self.väikefont.render("Vasakule nool: liiguta klotsi vasakule", 1, (255, 255, 255))
+        self.aken.blit(vasakuletekst, (555, 220))
+        paremaletekst = self.väikefont.render("Paremale nool: liiguta klotsi paremale", 1, (255, 255, 255))
+        self.aken.blit(paremaletekst, (555, 200))
+        Ntekst = self.väikefont.render("N Täht: järgmine lugu", 1, (255, 255, 255))
+        self.aken.blit(Ntekst, (555, 280))
+        pausetekst = self.väikefont.render("ESC: pause", 1, (255, 255, 255))
+        self.aken.blit(pausetekst, (555, 300))
 
     def muusika(self):
-        nimed = []
-        nimed.append( 'tetrisA.mp3')
-        nimed.append("Tetris - Theme 'A' Acapella.mp3")
-        nimed.append("Tetris - Theme 'B' Acapella.mp3")
-        pygame.mixer.music.load(os.path.join('andmed', choice(nimed)))
-        pygame.mixer.music.play(-1, 1.0)
+        self.nimed = []
+        self.nimed.append("Doctor P - Tetris.mp3")
+        self.nimed.append("Smooth McGroove - Theme 'A' Acapella.mp3")
+        self.nimed.append("Smooth McGroove - Theme 'B' Acapella.mp3")
+        self.nimed.append("Tetris A Original.mp3")
+        self.nimed.append("BassHunter - Tetris.mp3")
+        self.nimed.append("London Philharmonic Orchestra and Andrew Skeet -  Tetris Theme.mp3")
+        self.nimed.append("DaCav5 - Tetris.mp3")
+        self.loonimi = choice(self.nimed)
+
+        pygame.mixer.music.load(os.path.join('andmed', self.loonimi))
+        pygame.mixer.music.play(-1, 0.0)
+
         #does not loop very well
         #tried to change loop behaviour to no avail, media playeris loobib samamoodi väikse pausiga
         #viskasin documentationile pilgu peale, no obv way to fix this
@@ -792,7 +814,7 @@ class TetrisPõhi:
         self.eelmine = self.klots
         #print(self.klots)
         #print(self.järgmineKlots)
-        pygame.key.set_repeat(50, 50)
+        pygame.key.set_repeat(150, 50)
 
         while True:
             #if self.vaja_uus_klots:
