@@ -427,14 +427,12 @@ class TetrisPõhi:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
                     self.äärV = True
-                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
-                    self.äärV = True
                 if self.maatriks[self.klots["y"]+2][self.klots["x"]+2] != 0:
                     self.äärP = True
-                if self.maatriks[self.klots["y"]+3][self.klots["x"]] != 0:
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
-                if self.maatriks[self.klots["y"]+4][self.klots["x"]+1] != 0:
+                if self.maatriks[self.klots["y"]+3][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
