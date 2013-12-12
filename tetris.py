@@ -220,20 +220,20 @@ class TetrisPõhi:
                 for abi in range(rida-1, 0, -1):
                     self.maatriks[rida] = self.maatriks[rida-1]"""
 
-        """eemald_ridu = 0
-        y = 20
+        eemald_ridu = 0
+        y = 21
         while y >= 0:
             if self.on_täis_rida(y):
                 for nihuta_alla_y in range(y, 0, -1):
                     for x in range(10):
-                        self.maatriks[x][nihuta_alla_y] = self.maatriks[x][nihuta_alla_y - 1]
+                        self.maatriks[nihuta_alla_y][x] = self.maatriks[nihuta_alla_y - 1][x]
                 for x in range(10):
-                    self.maatriks[x][0] = 0
+                    self.maatriks[0][x] = 0
                 eemald_ridu += 1
             else:
                 y -= 1
 
-        self.skoor = eemald_ridu * 100"""
+        self.skoor += eemald_ridu * 100
 
 
     def joonista_maatriks(self):
