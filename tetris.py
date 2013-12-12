@@ -702,7 +702,7 @@ class TetrisPõhi:
         while True:
             for event in pygame.event.get():
                 if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
+                    if event.key == K_p:
                         lõpp = True
                         break
             if lõpp == True:
@@ -712,17 +712,12 @@ class TetrisPõhi:
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
-            #pygame.event.post(pygame.event.Event(QUIT))
+            pygame.event.post(pygame.event.Event(QUIT))
             #Väljub programmist
             #not anymore
-
+        if nupp == K_p:
             self.aken.fill(pygame.Color(0, 0, 0))
-            #pygame.music.stop()
-            #pausi kood:
             self.näita_teksti("Paused")
-
-            #edasi kood:
-            #self.muusika()
 
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
@@ -752,7 +747,6 @@ class TetrisPõhi:
             self.liigutaplokk("alla")
             self.i = 0
         if self.vaja_uus_klots:
-            print("wut wuuuuut")
             self.klots = self.järgmineKlots
             self.järgmineKlots = self.teeUusKlots()
             self.eelmine = self.klots
@@ -780,9 +774,12 @@ class TetrisPõhi:
         paremaletekst = self.väikefont.render("Paremale nool: liiguta klotsi paremale", 1, (255, 255, 255))
         self.aken.blit(paremaletekst, (555, 200))
         Ntekst = self.väikefont.render("N Täht: järgmine lugu", 1, (255, 255, 255))
-        self.aken.blit(Ntekst, (555, 280))
-        pausetekst = self.väikefont.render("ESC: pause", 1, (255, 255, 255))
-        self.aken.blit(pausetekst, (555, 300))
+        self.aken.blit(Ntekst, (555, 320))
+        pausetekst = self.väikefont.render("P Nupp: pause", 1, (255, 255, 255))
+        self.aken.blit(pausetekst, (555, 280))
+        exittekst = self.väikefont.render("ESC Nupp: välju programmist", 1, (255, 255, 255))
+        self.aken.blit(exittekst, (555, 300))
+
 
     def muusika(self):
         self.nimed = []
