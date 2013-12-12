@@ -38,6 +38,7 @@ class TetrisPõhi:
         self.vaja_uus_klots = False
         self.skoor = 0
         self.eelmine = 0
+        self.font = pygame.font.SysFont("monospace", 20)
 
         #kõik klotside kujud ja nende asendid
         self.O_shape = [[(1, 1, 0, 0),
@@ -493,6 +494,11 @@ class TetrisPõhi:
         self.joonista_maatriks()
         self.joonista_järgmine_klots()
         self.i += 1
+
+        järgminetekst = self.font.render("Järgmine plokk", 20, (255, 255, 255))
+        self.aken.blit(järgminetekst, (45, 200))
+        skoor = self.font.render("Skoor = " + str(self.skoor), 1, (255, 255, 255))
+        self.aken.blit(skoor, (65, 360))
 
     def muusika(self):
         nimed = []
