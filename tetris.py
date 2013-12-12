@@ -713,12 +713,13 @@ class TetrisPõhi:
             self.vaja_uus_klots = False
 
         self.is_valid_position()
-        if self.x == self.algnex and self.y == self.algney and self.äärPõhi:
+        if self.klots["x"] == self.algnex and self.klots["y"] == self.algney and self.äärPõhi:
             print("läbi")
-        self.lisaKlotsMaatriksisse()
-        self.joonista_maatriks()
-        self.joonista_järgmine_klots()
-        self.i += 1
+        else:
+            self.lisaKlotsMaatriksisse()
+            self.joonista_maatriks()
+            self.joonista_järgmine_klots()
+            self.i += 1
 
         järgminetekst = self.font.render("Järgmine plokk", 1, (255, 255, 255))
         self.aken.blit(järgminetekst, (45, 200))
