@@ -233,8 +233,6 @@ class TetrisPõhi:
         self.kustutaeelmine()
         self.pööre += 1
         self.is_valid_position()
-        print(self.äärV)
-        print(self.äärP)
         if not self.äärV and not self.äärP and not self.äärPõhi:
             try:
                 self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
@@ -651,8 +649,8 @@ class TetrisPõhi:
     def näita_teksti(self, tekst, tekst2 = ""):
         pause = self.suurfont.render(tekst, 1, (255, 255, 255))
         unpause = self.font.render(tekst2, 1, (255, 255, 255))
-        self.aken.blit(pause, (400, 350))
-        self.aken.blit(unpause, (470, 450))
+        self.aken.blit(pause, (200, 350))
+        self.aken.blit(unpause, (270, 450))
         lõpp = False
         while True:
             for event in pygame.event.get():
@@ -660,6 +658,8 @@ class TetrisPõhi:
                     if event.key == K_p:
                         lõpp = True
                         break
+                    elif event.type == K_ESCAPE:
+                        pygame.event.post(pygame.event.Event(QUIT))
             if lõpp == True:
                 break
             pygame.display.update()
@@ -708,7 +708,6 @@ class TetrisPõhi:
             self.klots = self.järgmineKlots
             self.järgmineKlots = self.teeUusKlots()
             self.eelmine = self.klots
-            #print(self.järgmineKlots)
             self.kontrolli_ridu()
             self.vaja_uus_klots = False
 
@@ -717,18 +716,17 @@ class TetrisPõhi:
             self.is_valid_position()
             if self.äärPõhi:
                 self.aken.fill(pygame.Color(0, 0, 0))
-                self.näita_teksti("Game over!", "Press R to restart")
-                lõpp = False
-                while True:
-                    for event in pygame.event.get():
-                        if event.type == KEYDOWN:
-                            if event.key == K_r:
-                                lõpp = True
-                                break
-                    if lõpp == True:
-                        break
-                    pygame.display.update()
-                    self.fpsClock.tick()
+                self.näita_teksti("Game over!")
+                #lõpp = False
+                #while True:
+                #    print("õlled")
+                #    for event in pygame.event.get():
+                #        if event.type == QUIT:
+                #            sys.exit()
+                #    if lõpp == True:
+                #        break
+                #    pygame.display.update()
+                #    self.fpsClock.tick()
 
 
 
