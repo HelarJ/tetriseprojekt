@@ -308,7 +308,7 @@ class TetrisPõhi:
                 self.vaja_uus_klots = True
 
         elif self.klots["kuju"] == "I":
-            if self.klots["asend"] == self.shapes["I"][0]:)
+            if self.klots["asend"] == self.shapes["I"][0]:
                 if self.maatriks[self.klots["y"]][self.klots["x"]+4] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -712,6 +712,9 @@ class TetrisPõhi:
             self.kontrolli_ridu()
             self.vaja_uus_klots = False
 
+        self.is_valid_position()
+        if self.x == self.algnex and self.y == self.algney and self.äärPõhi:
+            print("läbi")
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
         self.joonista_järgmine_klots()
