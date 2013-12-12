@@ -260,10 +260,17 @@ class TetrisPõhi:
     def pööra_klots(self):
         self.kustutaeelmine()
         self.pööre += 1
-        try:
-            self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
-        except IndexError:
-            self.pööre = 0
+        self.is_valid_position()
+        print(self.äärV)
+        print(self.äärP)
+        if not self.äärV and not self.äärP and not self.äärPõhi:
+            try:
+                self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
+            except IndexError:
+                self.pööre = 0
+                self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
+        else:
+            self.pööre -= 1
             self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
 
     def joonista_järgmine_klots(self):
