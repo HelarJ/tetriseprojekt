@@ -4,7 +4,6 @@ import pygame
 from pygame.locals import *
 from random import *
 
-
 class TetrisPõhi:
     def __init__(self):
         pygame.init()
@@ -83,7 +82,6 @@ class TetrisPõhi:
                     (1, 1, 1, 0),
                     (0, 0, 0, 0),
                     (0, 0, 0, 0)],
-                        #äärt ei taju
                    [(1, 1, 0, 0),
                     (1, 0, 0, 0),
                     (1, 0, 0, 0),
@@ -122,7 +120,6 @@ class TetrisPõhi:
                     (1, 1, 0, 0),
                     (0, 1, 0, 0),
                     (0, 0, 0, 0)],
-                   #äärt ei taju
                    [(1, 0, 0, 0),
                     (1, 1, 0, 0),
                     (1, 0, 0, 0),
@@ -142,6 +139,7 @@ class TetrisPõhi:
                   "T": self.T_shape
                 }
 
+
     def tühiplats(self):
         for i in range(22):
             rida = []
@@ -152,7 +150,8 @@ class TetrisPõhi:
             rida[0] = 'äär'
             rida[-1] = 'äär'
         self.maatriks.append(['äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär', 'äär'])
-        #print(self.maatriks)
+
+
     def võta_värv(self, kuju):
         if kuju == "O":
             return self.sinine
@@ -171,9 +170,6 @@ class TetrisPõhi:
 
 
     def teeUusKlots(self):
-        #teeb random uue random rotationis klotsi
-        #returnib klots, mis on dictionary võtmetega kuju, rotation, x, y (värv ka äkki?)
-        #
         klots = 0
         kuju = choice(list(self.shapes.keys()))
         klots = {"kuju": kuju,
@@ -184,34 +180,23 @@ class TetrisPõhi:
 
         return klots
 
+
     def lisaKlotsMaatriksisse(self):
-        #vist ei tööta
         koordinaat = False
-        #print(self.klots)
         for self.y in range(4):
             for self.x in range(4):
-                #print(self.klots)
                 koordinaat = self.klots["asend"][self.y][self.x]
-                #print(koordinaat)
-                #print(self.klots["asend"][y][x])
-                #print(self.shapes[self.klots["kuju"]][koordinaadid])
-                #print(self.klots["x"])
-                #print(self.klots["y"])
                 if koordinaat != 0:
                     self.maatriks[self.y + self.klots["y"]][self.x + self.klots["x"]] = self.klots["värv"]
 
-        #kui klots paika saab, lisatakse maatriksisse
-        #tuleb gameloopis kusagil välja kutsuda!
 
     def on_täis_rida(self, rida):
         for element in range(10):
             if self.maatriks[rida][element] == 0:
                 return False
-
         return True
 
     def kontrolli_ridu(self):
-
         eemald_ridu = 0
         y = 21
         while y >= 0:
@@ -229,25 +214,20 @@ class TetrisPõhi:
 
 
     def joonista_maatriks(self):
-        #teised klotsid ka vaja lisada
-        #print(self.maatriks)
-
         j = 0
+
         for rida in self.maatriks:
-            #print(rida)
             i = 0
-            arv = 0
+
             for element in rida:
                 if element == 'äär':
                     "something"
 
                 elif element != 0:
-
                     self.aken.blit(element, (220 + (i * 30), 20 + (j * 30)))
-                #if element == 0:  #Temporary, maatriksi sisu näitamiseks
-                    #self.aken.blit(self.hall, (250 + (i * 30), 20 + (j * 30)))
                 i += 1
             j +=  1
+
 
     def pööra_klots(self):
         self.kustutaeelmine()
@@ -265,8 +245,8 @@ class TetrisPõhi:
             self.pööre -= 1
             self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
 
+
     def joonista_järgmine_klots(self):
-        #klotside algseid asenedid tuleb muuta et normaalsem oleks
         j = 0
         for self.y in range(4):
             i = 0
@@ -277,6 +257,7 @@ class TetrisPõhi:
                 i += 1
             j += 1
 
+
     def kustutaeelmine(self):
         for self.y in range(4):
             for self.x in range(4):
@@ -284,16 +265,12 @@ class TetrisPõhi:
                 if koordinaat != 0:
                     self.maatriks[self.y + self.eelmine["y"]][self.x + self.eelmine["x"]] = 0
 
+
     def liigutaplokk(self, suund):
-        #vaja muuta et liigutaks kõiki klotse, mitte ainult kuupi
-
-
         self.is_valid_position()
 
-        if not self.vaja_uus_klots or (self.x == self.algnex and self.y == self.algney):
+        if not self.vaja_uus_klots:
             self.kustutaeelmine()
-
-
 
         if suund == ("alla"):
             if not self.äärPõhi:
@@ -308,7 +285,6 @@ class TetrisPõhi:
             if not self.äärV and not self.äärPõhi:
                 self.klots["x"] -= 1
 
-        #self.lisaKlotsMaatriksisse()
         self.äärP = False
         self.äärV = False
         self.äärPõhi = False
@@ -316,12 +292,6 @@ class TetrisPõhi:
 
 
     def is_valid_position(self):
-        #a = True
-
-        #kontrollib kas vasak äär
-        #kontrollib kas parem äär
-        #kontrollib kas seal juba on klots
-
         if self.klots["kuju"] == "O":
             if self.maatriks[self.klots["y"]][self.klots["x"]+2] != 0:
                 self.äärP = True
@@ -338,13 +308,8 @@ class TetrisPõhi:
                 self.äärPõhi = True
                 self.vaja_uus_klots = True
 
-
-
-
-
         elif self.klots["kuju"] == "I":
-            if self.klots["asend"] == self.shapes["I"][0]:
-                #print("adjfholw")
+            if self.klots["asend"] == self.shapes["I"][0]:)
                 if self.maatriks[self.klots["y"]][self.klots["x"]+4] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -363,7 +328,6 @@ class TetrisPõhi:
                     self.vaja_uus_klots = True
 
             elif self.klots["asend"] == self.shapes["I"][1]:
-                #print("saaaa")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -384,11 +348,8 @@ class TetrisPõhi:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
-
-
         elif self.klots["kuju"] == "S":
             if self.klots["asend"] == self.shapes["S"][0]:
-                #print("siii")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+3] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]] != 0:
@@ -407,10 +368,7 @@ class TetrisPõhi:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
-
-
             elif self.klots["asend"] == self.shapes["S"][1]:
-                #print("mooooooo")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
                 if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
@@ -427,7 +385,6 @@ class TetrisPõhi:
                 if self.maatriks[self.klots["y"]+3][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
-
 
         elif self.klots["kuju"] == "Z":
             if self.klots["asend"] == self.shapes["Z"][0]:
@@ -466,7 +423,6 @@ class TetrisPõhi:
                 if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
-
 
         elif self.klots["kuju"] == "L":
             if self.klots["asend"] == self.shapes["L"][0]:
@@ -544,8 +500,6 @@ class TetrisPõhi:
                 if self.maatriks[self.klots["y"]+2][self.klots["x"]+2] != 0:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
-
-
 
         elif self.klots["kuju"] == "J":
             if self.klots["asend"] == self.shapes["J"][0]:
@@ -712,25 +666,27 @@ class TetrisPõhi:
             pygame.display.update()
             self.fpsClock.tick()
 
+
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
             pygame.event.post(pygame.event.Event(QUIT))
             #Väljub programmist
-            #not anymore
+
         if nupp == K_p:
             self.aken.fill(pygame.Color(0, 0, 0))
             self.näita_teksti("Paused")
 
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
+
         if nupp == K_RIGHT:
             self.liigutaplokk("paremale")
-        if nupp == K_DOWN:
 
+        if nupp == K_DOWN:
             self.liigutaplokk("alla")
+
         if nupp == K_UP:
             self.pööra_klots()
-
 
         if nupp == K_n:
             eelmine = self.loonimi
@@ -741,13 +697,14 @@ class TetrisPõhi:
             pygame.mixer.music.load(os.path.join('andmed', self.loonimi))
             pygame.mixer.music.play(0, 0.0)
 
+
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
-        #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
         self.aken.blit(self.taust, (0,0))
-        #pygame.draw.rect(self.aken, pygame.Color(20, 20, 20), (250, 20, 300, 660))  #Mänguväljaku taust
+
         if self.i == self.kiirus:
             self.liigutaplokk("alla")
             self.i = 0
+
         if self.vaja_uus_klots:
             self.klots = self.järgmineKlots
             self.järgmineKlots = self.teeUusKlots()
@@ -755,6 +712,7 @@ class TetrisPõhi:
             #print(self.järgmineKlots)
             self.kontrolli_ridu()
             self.vaja_uus_klots = False
+
         self.lisaKlotsMaatriksisse()
         self.joonista_maatriks()
         self.joonista_järgmine_klots()
@@ -762,23 +720,31 @@ class TetrisPõhi:
 
         järgminetekst = self.font.render("Järgmine plokk", 1, (255, 255, 255))
         self.aken.blit(järgminetekst, (45, 200))
+
         skoor = self.font.render("Skoor = " + str(self.skoor), 1, (255, 255, 255))
         self.aken.blit(skoor, (70, 360))
+
         loonimetekst = self.font.render(self.loonimi, 1, (255, 255, 255))
         self.aken.blit(loonimetekst, (1, 1))
 
         ülestekst = self.väikefont.render("Üles nool: pööra klotsi", 1, (255, 255, 255))
         self.aken.blit(ülestekst, (555, 260))
+
         allatekst = self.väikefont.render("Alla nool: kiirenda kukkumist", 1, (255, 255, 255))
         self.aken.blit(allatekst, (555, 240))
+
         vasakuletekst = self.väikefont.render("Vasakule nool: liiguta klotsi vasakule", 1, (255, 255, 255))
         self.aken.blit(vasakuletekst, (555, 220))
+
         paremaletekst = self.väikefont.render("Paremale nool: liiguta klotsi paremale", 1, (255, 255, 255))
         self.aken.blit(paremaletekst, (555, 200))
+
         Ntekst = self.väikefont.render("N Täht: järgmine lugu", 1, (255, 255, 255))
         self.aken.blit(Ntekst, (555, 320))
+
         pausetekst = self.väikefont.render("P Nupp: pause", 1, (255, 255, 255))
         self.aken.blit(pausetekst, (555, 280))
+
         exittekst = self.väikefont.render("ESC Nupp: välju programmist", 1, (255, 255, 255))
         self.aken.blit(exittekst, (555, 300))
 
@@ -797,46 +763,26 @@ class TetrisPõhi:
         pygame.mixer.music.load(os.path.join('andmed', self.loonimi))
         pygame.mixer.music.play(-1, 0.0)
 
-        #does not loop very well
-        #tried to change loop behaviour to no avail, media playeris loobib samamoodi väikse pausiga
-        #viskasin documentationile pilgu peale, no obv way to fix this
-        # -1 tähendab et infinite loop ja 0.0 näitab sekundites kust järgmist loopi alustada
-        #okei, paistab et see paus ongi pygame viga teatud failide puhul
-        #mono wawid peaks väidetavalt toimima
-
-        #maybe replace with afro circus
 
     def põhikordus(self):
         self.muusika()
         self.tühiplats()
-
         self.klots = self.teeUusKlots()
         self.järgmineKlots = self.teeUusKlots()
         self.eelmine = self.klots
-        #print(self.klots)
-        #print(self.järgmineKlots)
         pygame.key.set_repeat(150, 50)
 
         while True:
-            #if self.vaja_uus_klots:
-                #self.klots = self.teeUusKlots()
-
-                #kui enam ei mahu siis mäng läbi
-                #if not is_valid_position(self, maatriks, kukkuv_klots):
-                #    return
             for event in pygame.event.get():
                 if event.type == QUIT:
                     sys.exit()
+
                 elif event.type == KEYDOWN:
-
                     self.nupuvajutus(event.key)
-
-
 
             self.joonista()
             pygame.display.update()  #joonistab kõik ekraanile
             self.fpsClock.tick(30)  #Renderdamise kiirus
-
 
 põhiaken = TetrisPõhi()
 põhiaken.põhikordus()
