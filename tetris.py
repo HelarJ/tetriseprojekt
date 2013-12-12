@@ -130,13 +130,13 @@ class TetrisPõhi:
                     (0, 0, 0, 0)]]
 
         self.shapes = {
-                  #"O": self.O_shape,
-                  #"I": self.I_shape,
-                  #"S": self.S_shape,
-                  #"Z": self.Z_shape,
+                  "O": self.O_shape,
+                  "I": self.I_shape,
+                  "S": self.S_shape,
+                  "Z": self.Z_shape,
                   "J": self.J_shape,
-                  #"L": self.L_shape,
-                  #"T": self.T_shape
+                  "L": self.L_shape,
+                  "T": self.T_shape
                 }
 
     def tühiplats(self):
@@ -626,14 +626,76 @@ class TetrisPõhi:
                     self.vaja_uus_klots = True
 
 
-        """elif self.klots["kuju"] == "T":
-            if self.klots["asend"] == 0:
+        elif self.klots["kuju"] == "T":
+            if self.klots["asend"] == self.shapes["T"][0]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+3] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
-            elif self.klots["asend"] == 1:
+            elif self.klots["asend"] == self.shapes["T"][1]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+3][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
-            elif self.klots["asend"] == 2:
+            elif self.klots["asend"] == self.shapes["T"][2]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+3][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
-            elif self.klots["asend"] == 3:"""
+            elif self.klots["asend"] == self.shapes["T"][3]:
+                if self.maatriks[self.klots["y"]][self.klots["x"]+2] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]][self.klots["x"]] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]+3] != 0:
+                    self.äärP = True
+                if self.maatriks[self.klots["y"]+1][self.klots["x"]-1] != 0:
+                    self.äärV = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+1] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
+                if self.maatriks[self.klots["y"]+2][self.klots["x"]+2] != 0:
+                    self.äärPõhi = True
+                    self.vaja_uus_klots = True
 
 
 
