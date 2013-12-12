@@ -259,6 +259,7 @@ class TetrisPõhi:
             j +=  1
 
     def pööra_klots(self):
+        self.kustutaeelmine()
         self.pööre += 1
         try:
             self.klots["asend"] = self.shapes[self.klots["kuju"]][self.pööre]
