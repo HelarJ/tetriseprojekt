@@ -43,6 +43,7 @@ class TetrisPõhi:
         self.suurfont = pygame.font.SysFont("monospace", 100)
         self.pööre = 0
         self.loonimi = 0
+        self.skoorid = [0, 100, 300, 600, 1000]
 
 
         #kõik klotside kujud ja nende asendid
@@ -170,6 +171,7 @@ class TetrisPõhi:
 
 
     def teeUusKlots(self):
+
         klots = 0
         kuju = choice(list(self.shapes.keys()))
         klots = {"kuju": kuju,
@@ -191,7 +193,7 @@ class TetrisPõhi:
 
 
     def on_täis_rida(self, rida):
-        for element in range(10):
+        for element in range(1, 11):
             if self.maatriks[rida][element] == 0:
                 return False
         return True
@@ -202,15 +204,17 @@ class TetrisPõhi:
         while y >= 0:
             if self.on_täis_rida(y):
                 for nihuta_alla_y in range(y, 0, -1):
-                    for x in range(10):
+                    for x in range(1, 11):
                         self.maatriks[nihuta_alla_y][x] = self.maatriks[nihuta_alla_y - 1][x]
-                for x in range(10):
+                for x in range(1, 11):
                     self.maatriks[0][x] = 0
                 eemald_ridu += 1
             else:
                 y -= 1
 
-        self.skoor += eemald_ridu * 100
+        self.skoor += self.skoorid[eemald_ridu]
+        self.kiirus = 15 - int(self.skoor/1000)
+
 
 
     def joonista_maatriks(self):
@@ -267,7 +271,7 @@ class TetrisPõhi:
     def liigutaplokk(self, suund):
         self.is_valid_position()
 
-        if not self.vaja_uus_klots:
+        if not self.vaja_uus_klots and not self.äärPõhi:
             self.kustutaeelmine()
 
         if suund == ("alla"):
@@ -275,11 +279,11 @@ class TetrisPõhi:
                 self.klots["y"] += 1
 
         if suund == ("paremale"):
-            if not self.äärP and not self.äärPõhi:
+            if not self.äärP:
                 self.klots["x"] += 1
 
         if suund == ("vasakule"):
-            if not self.äärV and not self.äärPõhi:
+            if not self.äärV:
                 self.klots["x"] -= 1
 
         self.äärP = False
@@ -770,13 +774,13 @@ class TetrisPõhi:
 
     def muusika(self):
         self.nimed = []
-        self.nimed.append("Doctor P - Tetris.mp3")
-        self.nimed.append("Smooth McGroove - Theme 'A' Acapella.mp3")
-        self.nimed.append("Smooth McGroove - Theme 'B' Acapella.mp3")
-        self.nimed.append("Tetris A Original.mp3")
-        self.nimed.append("BassHunter - Tetris.mp3")
-        self.nimed.append("London Philharmonic Orchestra and Andrew Skeet -  Tetris Theme.mp3")
-        self.nimed.append("DaCav5 - Tetris.mp3")
+        self.nimed.append("Doctor P - Tetris.ogg")
+        self.nimed.append("Smooth McGroove - Theme 'A' Acapella.ogg")
+        self.nimed.append("Smooth McGroove - Theme 'B' Acapella.ogg")
+        self.nimed.append("Tetris A Original.ogg")
+        self.nimed.append("BassHunter - Tetris.ogg")
+        self.nimed.append("London Philharmonic Orchestra and Andrew Skeet -  Tetris Theme.ogg")
+        self.nimed.append("DaCav5 - Tetris.ogg")
         self.loonimi = choice(self.nimed)
 
         pygame.mixer.music.load(os.path.join('andmed', self.loonimi))
