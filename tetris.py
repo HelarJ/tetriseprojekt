@@ -702,19 +702,33 @@ class TetrisPõhi:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
+    def tee_tekst(self, tekst, font, värv):
+        pind = font.render(tekst, True, värv)
+        return pind, pind.get_rect()
 
 
-
-
-
-
-
-
+    def näita_teksti(self, tekst):
+            teksti_pind, teksti_kast = tee_tekst(tekst, pygame.font.Font("freesansbold".ttf, 100), self.orange)
+            teksti_kast.center = (400, 350)
+            pygame.display.blit(teksti_pind, teksti_kast)
+            while :
+                pygame.display.update()
+                self.fpsClock.tick()
 
     def nupuvajutus(self, nupp):  #abifunktsioon nupuvajutuste kontrolliks
         if nupp == K_ESCAPE:
-            pygame.event.post(pygame.event.Event(QUIT))
+            #pygame.event.post(pygame.event.Event(QUIT))
             #Väljub programmist
+            #not anymore
+
+            pygame.display.fill(self.must)
+            pygame.music.stop()
+            #pausi kood:
+            self.näita_teksti("Paused")
+
+            #edasi kood:
+            self.muusika()
+
         if nupp == K_LEFT:
             self.liigutaplokk("vasakule")
         if nupp == K_RIGHT:
@@ -724,6 +738,7 @@ class TetrisPõhi:
             self.liigutaplokk("alla")
         if nupp == K_UP:
             self.pööra_klots()
+
 
     def joonista(self):  #abifunktsioon kaadri joonistamiseks
         #self.aken.fill(pygame.Color(100, 100, 100))  #Kogu taust
