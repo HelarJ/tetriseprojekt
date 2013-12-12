@@ -126,8 +126,8 @@ class TetrisPõhi:
                     (0, 0, 0, 0)]]
 
         self.shapes = {
-                  #"O": self.O_shape,
-                  #"I": self.I_shape,
+                  "O": self.O_shape,
+                  "I": self.I_shape,
                   "S": self.S_shape,
                   #"Z": self.Z_shape,
                   #"J": self.J_shape,
@@ -181,10 +181,10 @@ class TetrisPõhi:
         #vist ei tööta
         koordinaat = False
         #print(self.klots)
-        for self.x in range(4):
-            for self.y in range(4):
+        for self.y in range(4):
+            for self.x in range(4):
                 #print(self.klots)
-                koordinaat = self.klots["asend"][self.x][self.y]
+                koordinaat = self.klots["asend"][self.y][self.x]
                 #print(koordinaat)
                 #print(self.klots["asend"][y][x])
                 #print(self.shapes[self.klots["kuju"]][koordinaadid])
@@ -256,19 +256,19 @@ class TetrisPõhi:
     def joonista_järgmine_klots(self):
         #klotside algseid asenedid tuleb muuta et normaalsem oleks
         j = 0
-        for self.x in range(4):
+        for self.y in range(4):
             i = 0
-            for self.y in range(4):
+            for self.x in range(4):
                 koordinaat = self.järgmineKlots["asend"][self.y][self.x]
                 if koordinaat != 0:
-                    self.aken.blit(self.järgmineKlots["värv"], (65 + (i * 30), 230 + (j * 30)))
+                    self.aken.blit(self.järgmineKlots["värv"], (65 + (i * 30), 260 + (j * 30)))
                 i += 1
             j += 1
 
     def kustutaeelmine(self):
-        for self.x in range(4):
-            for self.y in range(4):
-                koordinaat = self.eelmine["asend"][self.x][self.y]
+        for self.y in range(4):
+            for self.x in range(4):
+                koordinaat = self.eelmine["asend"][self.y][self.x]
                 if koordinaat != 0:
                     self.maatriks[self.y + self.eelmine["y"]][self.x + self.eelmine["x"]] = 0
 
@@ -331,7 +331,7 @@ class TetrisPõhi:
 
 
         elif self.klots["kuju"] == "I":
-            if self.klots["asend"] == self.shapes["I"][1]:
+            if self.klots["asend"] == self.shapes["I"][0]:
                 print("adjfholw")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+4] != 0:
                     self.äärP = True
@@ -350,7 +350,7 @@ class TetrisPõhi:
                     self.äärPõhi = True
                     self.vaja_uus_klots = True
 
-            elif self.klots["asend"] == self.shapes["I"][0]:
+            elif self.klots["asend"] == self.shapes["I"][1]:
                 print("saaaa")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
@@ -375,7 +375,7 @@ class TetrisPõhi:
 
 
         elif self.klots["kuju"] == "S":
-            if self.klots["asend"] == self.shapes["S"][1]:
+            if self.klots["asend"] == self.shapes["S"][0]:
                 print("siii")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+3] != 0:
                     self.äärP = True
@@ -397,7 +397,7 @@ class TetrisPõhi:
 
 
 
-            elif self.klots["asend"] == self.shapes["S"][0]:
+            elif self.klots["asend"] == self.shapes["S"][1]:
                 print("mooooooo")
                 if self.maatriks[self.klots["y"]][self.klots["x"]+1] != 0:
                     self.äärP = True
