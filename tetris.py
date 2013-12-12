@@ -708,7 +708,7 @@ class TetrisPõhi:
 
 
     def näita_teksti(self, tekst):
-            teksti_pind, teksti_kast = tee_tekst(tekst, pygame.font.Font("freesansbold".ttf, 100), self.orange)
+            teksti_pind, teksti_kast = self.tee_tekst(tekst, pygame.font.Font("freesansbold.ttf", 100), self.oranz)
             teksti_kast.center = (400, 350)
             pygame.display.blit(teksti_pind, teksti_kast)
             for event in pygame.event.get():
@@ -723,8 +723,8 @@ class TetrisPõhi:
             #Väljub programmist
             #not anymore
 
-            pygame.display.fill((0, 0, 0))
-            pygame.music.stop()
+            self.aken.fill(pygame.Color(0, 0, 0))
+            #pygame.music.stop()
             #pausi kood:
             self.näita_teksti("Paused")
 
